@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Piso 1 · Benidorm · Alquileres</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{--soria:#5c7a4e;--soria-light:#eaf2e5;--soria-dark:#3a4f30;--benidorm:#2a7ab8;--benidorm-light:#e5f1fb;--benidorm-dark:#1a4f78;--dark:#1a1a2e;--text:#333;--light:#f9f9f9;
+    --accent:var(--benidorm);--accent-dark:var(--benidorm-dark);--accent-light:var(--benidorm-light)}
+  body{font-family:'Segoe UI',sans-serif;color:var(--text);background:var(--light)}
+  a{text-decoration:none;color:inherit}
+
+  nav{position:fixed;top:0;width:100%;z-index:100;transition:.3s;padding:18px 5%}
+  nav.solid{background:var(--dark);box-shadow:0 2px 20px rgba(0,0,0,.3);padding:12px 5%}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between}
+  .logo{color:#fff;font-size:1.3rem;font-weight:700;letter-spacing:1px}
+  .nav-links{display:flex;gap:1.8rem;align-items:center}
+  .nav-links a{color:#fff;font-size:.95rem;transition:.2s}.nav-links a:hover{color:#90caf9}
+  .dropdown{position:relative}
+  .dropdown-btn{background:none;border:none;color:#fff;font-size:.95rem;cursor:pointer;display:flex;align-items:center;gap:5px;font-family:inherit;padding:0}.dropdown-btn:hover{color:#90caf9}
+  .arrow{transition:transform .25s}.dropdown-btn.open .arrow{transform:rotate(180deg)}
+  .dropdown-menu{display:none;position:absolute;top:140%;left:0;background:#fff;border-radius:10px;box-shadow:0 8px 25px rgba(0,0,0,.15);overflow:hidden;min-width:220px}
+  .dropdown-menu.open{display:block}
+  .dropdown-menu a{display:flex;align-items:center;justify-content:space-between;padding:13px 18px;font-size:.9rem;color:var(--text);transition:.2s;border-bottom:1px solid #f0f0f0}
+  .dropdown-menu a:last-child{border:none}.dropdown-menu a:hover{background:var(--light)}
+  .dd-badge{font-size:.7rem;padding:2px 8px;border-radius:10px;font-weight:600}
+  .dd-soria{background:var(--soria-light);color:var(--soria-dark)}.dd-benidorm{background:var(--benidorm-light);color:var(--benidorm-dark)}
+  .lang-switcher{display:flex;gap:.5rem;align-items:center}
+  .lang-btn{background:none;border:2px solid transparent;border-radius:6px;padding:3px 5px;cursor:pointer;opacity:.55;transition:.2s;display:flex;align-items:center;line-height:0}
+  .lang-btn:hover{opacity:1}.lang-btn.active{border-color:rgba(255,255,255,.7);opacity:1}
+  .lang-btn svg{width:26px;height:18px;border-radius:3px}
+  .hamburger{display:none;background:none;border:none;cursor:pointer;padding:4px;flex-direction:column;gap:5px}
+  .hamburger span{display:block;width:24px;height:2px;background:#fff;border-radius:2px}
+  .mobile-menu{display:none;position:fixed;top:0;left:0;width:100%;height:100vh;background:var(--dark);z-index:99;flex-direction:column;align-items:center;justify-content:center;gap:2rem}
+  .mobile-menu.open{display:flex}
+  .mobile-menu a{color:#fff;font-size:1.3rem}
+  .mobile-lang{display:flex;gap:1.2rem;margin-top:1rem;align-items:center}
+  .mobile-lang .lang-btn{padding:5px 7px}.mobile-lang .lang-btn svg{width:36px;height:24px}
+  .close-mobile{position:absolute;top:20px;right:5%;font-size:2rem;color:#fff;background:none;border:none;cursor:pointer}
+
+  .photo-hero{position:relative;height:520px;background:var(--accent-light);overflow:hidden}
+  .photo-slides{display:flex;height:100%;transition:transform .45s ease}
+  .photo-slide{min-width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:8rem;background:linear-gradient(135deg,#d0e8f8,#a8cef0);user-select:none;flex-shrink:0}
+  .photo-slide img{width:100%;height:100%;object-fit:cover}
+  .ph-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.45);color:#fff;border:none;border-radius:50%;width:48px;height:48px;font-size:1.5rem;cursor:pointer;z-index:5;transition:.2s}
+  .ph-btn:hover{background:rgba(0,0,0,.7)}.ph-prev{left:20px}.ph-next{right:20px}
+  .ph-dots{position:absolute;bottom:16px;width:100%;display:flex;justify-content:center;gap:8px}
+  .ph-dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.5);cursor:pointer;transition:.2s;border:2px solid rgba(255,255,255,.6)}.ph-dot.active{background:#fff}
+  .ph-counter{position:absolute;top:72px;right:20px;background:rgba(0,0,0,.45);color:#fff;font-size:.85rem;padding:4px 12px;border-radius:20px}
+
+  .back-btn{display:inline-flex;align-items:center;gap:.5rem;margin:20px 5%;padding:9px 20px;background:var(--accent);color:#fff;border:none;border-radius:50px;font-size:.9rem;font-weight:600;cursor:pointer;transition:.2s;text-decoration:none}
+  .back-btn:hover{background:var(--accent-dark);transform:translateX(-3px)}
+
+  .casa-layout{display:grid;grid-template-columns:1fr 340px;gap:2.5rem;max-width:1100px;margin:0 auto;padding:0 5% 60px}
+  .casa-main h1{font-size:clamp(1.6rem,3vw,2.2rem);font-weight:800;margin-bottom:.5rem}
+  .casa-location{color:#777;font-size:.95rem;margin-bottom:1.2rem}
+  .casa-meta{display:flex;gap:1.2rem;flex-wrap:wrap;margin-bottom:2rem;padding-bottom:1.5rem;border-bottom:1px solid #eee}
+  .meta-item{display:flex;flex-direction:column;align-items:center;background:#fff;border-radius:12px;padding:.8rem 1.2rem;box-shadow:0 2px 10px rgba(0,0,0,.07);min-width:70px}
+  .meta-item .mi-icon{font-size:1.4rem;margin-bottom:.2rem}
+  .meta-item .mi-val{font-size:1rem;font-weight:700;color:var(--accent-dark)}
+  .meta-item .mi-lab{font-size:.72rem;color:#888}
+  .casa-section{margin-bottom:2rem}
+  .casa-section h2{font-size:1.2rem;font-weight:700;color:var(--accent-dark);margin-bottom:.8rem;padding-bottom:.4rem;border-bottom:2px solid var(--accent-light)}
+  .casa-section p{font-size:.95rem;color:#444;line-height:1.8}
+  .features-grid{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+  .feature-item{display:flex;align-items:center;gap:.5rem;font-size:.88rem;color:#555;background:#fff;padding:.6rem .8rem;border-radius:8px;box-shadow:0 1px 6px rgba(0,0,0,.06)}
+
+  .casa-sidebar{position:sticky;top:80px;align-self:start}
+  .price-card{background:#fff;border-radius:16px;box-shadow:0 4px 24px rgba(0,0,0,.1);padding:1.8rem;border-top:4px solid var(--accent);margin-bottom:1.5rem}
+  .price-main{font-size:2rem;font-weight:800;color:var(--accent-dark);margin-bottom:.2rem}
+  .price-main span{font-size:1rem;font-weight:400;color:#888}
+  .price-note{font-size:.82rem;color:#999;margin-bottom:1.4rem}
+  .contact-btns-v{display:flex;flex-direction:column;gap:.7rem}
+  .btn-accent{background:var(--accent);color:#fff;display:block;padding:13px;border-radius:50px;font-size:1rem;font-weight:600;transition:.25s;text-align:center;border:none}.btn-accent:hover{background:var(--accent-dark)}
+  .btn-outline-accent{background:transparent;color:var(--accent-dark);border:2px solid var(--accent);display:block;padding:11px;border-radius:50px;font-size:1rem;font-weight:600;transition:.25s;text-align:center}.btn-outline-accent:hover{background:var(--accent);color:#fff}
+  .otras-casas{background:#fff;border-radius:16px;box-shadow:0 4px 24px rgba(0,0,0,.1);padding:1.4rem}
+  .otras-casas h3{font-size:1rem;font-weight:700;color:var(--accent-dark);margin-bottom:1rem}
+  .otra-item{display:flex;align-items:center;justify-content:space-between;padding:.7rem 0;border-bottom:1px solid #f0f0f0;font-size:.88rem}
+  .otra-item:last-child{border:none}
+  .otra-item a{color:var(--accent);font-weight:600;font-size:.8rem;transition:.2s}.otra-item a:hover{color:var(--accent-dark)}
+
+  .gallery-section{max-width:1100px;margin:0 auto;padding:0 5% 60px}
+  .gallery-section h2{font-size:1.3rem;font-weight:700;color:var(--accent-dark);margin-bottom:.4rem;padding-bottom:.4rem;border-bottom:2px solid var(--accent-light)}
+  .gallery-subtitle{font-size:.88rem;color:#888;margin-bottom:1.2rem}
+  .gallery-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:1rem}
+  .gallery-thumb{border-radius:10px;overflow:hidden;height:150px;cursor:pointer;transition:.3s;background:linear-gradient(135deg,#d0e8f8,#a8cef0);display:flex;align-items:center;justify-content:center;font-size:3rem;position:relative}
+  .gallery-thumb:hover{transform:scale(1.04);box-shadow:0 6px 20px rgba(0,0,0,.18)}
+  .gallery-thumb img{width:100%;height:100%;object-fit:cover}
+  .gallery-thumb .zoom-icon{position:absolute;bottom:8px;right:8px;background:rgba(0,0,0,.45);color:#fff;font-size:.7rem;padding:3px 8px;border-radius:10px;pointer-events:none}
+
+  .lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.93);z-index:999;align-items:center;justify-content:center}
+  .lightbox.open{display:flex}
+  .lb-inner{max-width:90vw;max-height:88vh;display:flex;align-items:center;justify-content:center}
+  .lb-emoji{font-size:9rem;user-select:none}
+  .lb-img{max-width:88vw;max-height:85vh;border-radius:8px;object-fit:contain}
+  .lb-close{position:fixed;top:20px;right:24px;background:none;border:none;color:#fff;font-size:2.2rem;cursor:pointer;z-index:1000;opacity:.8}.lb-close:hover{opacity:1}
+  .lb-arrow{position:fixed;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.12);border:none;color:#fff;font-size:2rem;cursor:pointer;padding:12px 18px;border-radius:8px;transition:.2s;z-index:1000}.lb-arrow:hover{background:rgba(255,255,255,.28)}
+  .lb-prev{left:16px}.lb-next{right:16px}
+  .lb-counter{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.75);font-size:.9rem}
+  .lb-dots{position:fixed;bottom:48px;left:50%;transform:translateX(-50%);display:flex;gap:8px}
+  .lb-dot{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.35);cursor:pointer;transition:.2s}.lb-dot.active{background:#fff}
+  .lb-caption{position:fixed;bottom:72px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.7);font-size:.85rem;text-align:center;max-width:400px}
+
+  footer{background:var(--dark);color:rgba(255,255,255,.5);text-align:center;padding:1.5rem;font-size:.85rem}
+
+  @media(max-width:900px){.casa-layout{grid-template-columns:1fr}.casa-sidebar{position:static}}
+  @media(max-width:768px){
+    .nav-links{display:none}.hamburger{display:flex}
+    .photo-hero{height:280px}
+    .features-grid{grid-template-columns:1fr}
+    .lb-arrow{padding:8px 12px;font-size:1.5rem}
+  }
+</style>
+</head>
+<body>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Visor de fotos de Benidorm">
+  <button class="lb-close" onclick="closeLB()" aria-label="Cerrar visor">✕</button>
+  <button class="lb-arrow lb-prev" onclick="lbMove(-1)" aria-label="Foto anterior">‹</button>
+  <div class="lb-inner"><div id="lb-content" aria-live="polite"></div></div>
+  <button class="lb-arrow lb-next" onclick="lbMove(1)" aria-label="Foto siguiente">›</button>
+  <div class="lb-dots" id="lb-dots"></div>
+  <div class="lb-caption" id="lb-caption"></div>
+  <div class="lb-counter" id="lb-counter" aria-live="polite"></div>
+</div>
+
+<nav id="navbar" role="navigation" aria-label="Menú principal">
+  <div class="nav-inner">
+    <a href="index.html" class="logo" aria-label="Ir a la página principal">🏡 Alquileres</a>
+    <div class="nav-links">
+      <div class="dropdown">
+        <button class="dropdown-btn" id="dd-btn" onclick="toggleDropdown(event)" aria-haspopup="true" aria-expanded="false" aria-controls="dd-menu">
+          <span data-i18n="nav_ubicaciones">Ubicaciones</span> <span class="arrow" aria-hidden="true">▾</span>
+        </button>
+        <div class="dropdown-menu" id="dd-menu" role="menu">
+          <a href="ontalvilla-de-almazan.html" role="menuitem">🌿 <span data-i18n="nav_ontalvilla">Ontalvilla de Almazán</span> <span class="dd-badge dd-soria">Soria</span></a>
+          <a href="benidorm.html" role="menuitem">🌊 <span data-i18n="nav_benidorm">Benidorm</span> <span class="dd-badge dd-benidorm">Valencia</span></a>
+        </div>
+      </div>
+      <a href="sobre-nosotros.html" data-i18n="nav_sobre">Sobre nosotros</a>
+      <div class="lang-switcher" role="group" aria-label="Seleccionar idioma">
+        <button class="lang-btn active" id="btn-es" onclick="setLang('es')" aria-label="Cambiar idioma a Español" title="Español">
+          <svg viewBox="0 0 60 40" aria-hidden="true"><rect width="60" height="40" fill="#c60b1e"/><rect y="10" width="60" height="20" fill="#ffc400"/></svg>
+        </button>
+        <button class="lang-btn" id="btn-en" onclick="setLang('en')" aria-label="Change language to English" title="English">
+          <svg viewBox="0 0 60 40" aria-hidden="true"><rect width="60" height="40" fill="#012169"/><path d="M0,0 L60,40 M60,0 L0,40" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,40 M60,0 L0,40" stroke="#C8102E" stroke-width="4"/><path d="M30,0 V40 M0,20 H60" stroke="#fff" stroke-width="10"/><path d="M30,0 V40 M0,20 H60" stroke="#C8102E" stroke-width="6"/></svg>
+        </button>
+      </div>
+    </div>
+    <button class="hamburger" onclick="openMobile()" aria-label="Abrir menú" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true">
+  <button class="close-mobile" onclick="closeMobile()" aria-label="Cerrar menú">✕</button>
+  <a href="ontalvilla-de-almazan.html">🌿 <span data-i18n="nav_ontalvilla">Ontalvilla de Almazán</span></a>
+  <a href="benidorm.html">🌊 <span data-i18n="nav_benidorm">Benidorm</span></a>
+  <a href="sobre-nosotros.html" data-i18n="nav_sobre">Sobre nosotros</a>
+  <div class="mobile-lang">
+    <button class="lang-btn active" id="mob-es" onclick="setLang('es');closeMobile()" aria-label="Cambiar a Español" title="Español">
+      <svg viewBox="0 0 60 40" aria-hidden="true"><rect width="60" height="40" fill="#c60b1e"/><rect y="10" width="60" height="20" fill="#ffc400"/></svg>
+    </button>
+    <button class="lang-btn" id="mob-en" onclick="setLang('en');closeMobile()" aria-label="Switch to English" title="English">
+      <svg viewBox="0 0 60 40" aria-hidden="true"><rect width="60" height="40" fill="#012169"/><path d="M0,0 L60,40 M60,0 L0,40" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,40 M60,0 L0,40" stroke="#C8102E" stroke-width="4"/><path d="M30,0 V40 M0,20 H60" stroke="#fff" stroke-width="10"/><path d="M30,0 V40 M0,20 H60" stroke="#C8102E" stroke-width="6"/></svg>
+    </button>
+  </div>
+</div>
+
+<main>
+  <div class="photo-hero" role="region" aria-label="Fotos de Piso 1">
+    <div class="photo-slides" id="photo-slides">
+      <div class="photo-slide" role="img" aria-label="Foto 1 — terraza con vistas al mar">🌊</div>
+      <div class="photo-slide" role="img" aria-label="Foto 2 — salón">🏖️</div>
+      <div class="photo-slide" role="img" aria-label="Foto 3 — dormitorio principal">🛏️</div>
+      <div class="photo-slide" role="img" aria-label="Foto 4 — cocina">🍽️</div>
+      <div class="photo-slide" role="img" aria-label="Foto 5 — vistas desde la terraza">🌅</div>
+    </div>
+    <button class="ph-btn ph-prev" onclick="phMove(-1)" aria-label="Foto anterior">‹</button>
+    <button class="ph-btn ph-next" onclick="phMove(1)" aria-label="Foto siguiente">›</button>
+    <div class="ph-dots" id="ph-dots"></div>
+    <div class="ph-counter" id="ph-counter" aria-live="polite">1 / 5</div>
+  </div>
+
+  <a href="benidorm.html" class="back-btn" aria-label="Volver a Benidorm">
+    ← <span data-i18n="back_btn">Volver a Benidorm</span>
+  </a>
+
+  <div class="casa-layout">
+    <div class="casa-main">
+      <h1 data-i18n="piso_name">Piso 1</h1>
+      <p class="casa-location">📍 Benidorm, Alicante</p>
+      <div class="casa-meta" role="list">
+        <div class="meta-item" role="listitem"><span class="mi-icon" aria-hidden="true">🛏</span><span class="mi-val">3</span><span class="mi-lab" data-i18n="meta_beds">Habitaciones</span></div>
+        <div class="meta-item" role="listitem"><span class="mi-icon" aria-hidden="true">🚿</span><span class="mi-val">2</span><span class="mi-lab" data-i18n="meta_baths">Baños</span></div>
+        <div class="meta-item" role="listitem"><span class="mi-icon" aria-hidden="true">📐</span><span class="mi-val">85</span><span class="mi-lab">m²</span></div>
+        <div class="meta-item" role="listitem"><span class="mi-icon" aria-hidden="true">👥</span><span class="mi-val">6</span><span class="mi-lab" data-i18n="meta_guests">Huéspedes</span></div>
+      </div>
+      <div class="casa-section">
+        <h2 data-i18n="sec_descripcion">Descripción</h2>
+        <p data-i18n="piso_desc">Moderno piso situado a tan solo 50 metros de la Playa de Levante. Cuenta con una amplia terraza desde la que se disfrutan vistas despejadas al mar Mediterráneo. El interior está totalmente reformado y equipado con todo lo necesario para una estancia cómoda. A cinco minutos a pie del centro de Benidorm, restaurantes y el paseo marítimo.</p>
+      </div>
+      <div class="casa-section">
+        <h2 data-i18n="sec_equipamiento">Equipamiento</h2>
+        <div class="features-grid">
+          <div class="feature-item"><span>🌊</span><span data-i18n="feat_vistas">Vistas al mar</span></div>
+          <div class="feature-item"><span>🌞</span><span data-i18n="feat_terraza">Terraza exterior</span></div>
+          <div class="feature-item"><span>📶</span><span data-i18n="feat_wifi">WiFi gratuito</span></div>
+          <div class="feature-item"><span>❄️</span><span data-i18n="feat_ac">Aire acondicionado</span></div>
+          <div class="feature-item"><span>🍳</span><span data-i18n="feat_cocina">Cocina completa</span></div>
+          <div class="feature-item"><span>📺</span><span data-i18n="feat_tv">Smart TV</span></div>
+          <div class="feature-item"><span>🧺</span><span data-i18n="feat_lavadora">Lavadora</span></div>
+          <div class="feature-item"><span>🅿️</span><span data-i18n="feat_parking">Parking cercano</span></div>
+        </div>
+      </div>
+      <div class="casa-section">
+        <h2 data-i18n="sec_normas">Normas del piso</h2>
+        <p data-i18n="piso_normas">Entrada a partir de las 15:00 h · Salida antes de las 11:00 h · No se permiten fiestas ni eventos · Máximo 6 personas · No se admiten mascotas · Respetar el descanso de los vecinos.</p>
+      </div>
+    </div>
+
+    <aside class="casa-sidebar" aria-label="Precio y contacto">
+      <div class="price-card">
+        <div class="price-main">140€ <span data-i18n="price_per_night">/ noche</span></div>
+        <p class="price-note" data-i18n="price_note">Precio orientativo. Consulta disponibilidad.</p>
+        <div class="contact-btns-v">
+          <a href="tel:+34600000002" class="btn-accent" data-i18n="btn_call_reserve">📞 Llamar para reservar</a>
+          <a href="https://wa.me/34600000002?text=Hola,%20me%20interesa%20el%20Piso%201%20de%20Benidorm" target="_blank" rel="noopener" class="btn-accent" data-i18n="btn_whatsapp">💬 WhatsApp</a>
+          <a href="mailto:benidorm@alquileres.es?subject=Consulta%20Piso%201%20Benidorm" class="btn-outline-accent" data-i18n="btn_email">✉️ Email</a>
+        </div>
+      </div>
+      <div class="otras-casas" role="navigation" aria-label="Otros pisos en Benidorm">
+        <h3 data-i18n="otros_pisos">Otros pisos en Benidorm</h3>
+        <div class="otra-item"><span data-i18n="piso2">Piso 2</span><a href="piso-benidorm-2.html" data-i18n="ver_piso">Ver →</a></div>
+        <div class="otra-item"><span data-i18n="piso3">Piso 3</span><a href="piso-benidorm-3.html" data-i18n="ver_piso">Ver →</a></div>
+      </div>
+    </aside>
+  </div>
+
+  <!-- GALERÍA DE BENIDORM Y LA ZONA -->
+  <div class="gallery-section" aria-labelledby="galeria-title">
+    <h2 id="galeria-title" data-i18n="sec_galeria">Descubre Benidorm</h2>
+    <p class="gallery-subtitle" data-i18n="galeria_sub">Benidorm y la Costa Blanca — haz clic en cualquier foto para ampliarla</p>
+    <div class="gallery-grid" id="gallery-grid"></div>
+  </div>
+</main>
+
+<footer role="contentinfo"><p data-i18n="footer">© 2025 Alquileres · Todos los derechos reservados</p></footer>
+
+<script>
+const ZONE_PHOTOS=[
+  {src:"🏖️",caption_es:"Playa de Levante — Bandera Azul",caption_en:"Levante Beach — Blue Flag"},
+  {src:"🏔️",caption_es:"Peñón de Ifach, Calpe",caption_en:"Peñón de Ifach, Calpe"},
+  {src:"🏰",caption_es:"Casco antiguo de Benidorm",caption_en:"Benidorm old town"},
+  {src:"🌴",caption_es:"Isla de Benidorm — Reserva Natural",caption_en:"Benidorm Island — Nature Reserve"},
+  {src:"🕌",caption_es:"Pueblo medieval de Guadalest",caption_en:"Medieval village of Guadalest"},
+  {src:"🌅",caption_es:"Atardecer en el Mediterráneo",caption_en:"Mediterranean sunset"},
+];
+
+let lbIdx=0,currentLang='es';
+
+function buildGallery(){
+  document.getElementById('gallery-grid').innerHTML=ZONE_PHOTOS.map((p,i)=>`
+    <div class="gallery-thumb" onclick="openLB(${i})" role="button" tabindex="0"
+      aria-label="${currentLang==='es'?p.caption_es:p.caption_en}"
+      onkeydown="if(event.key==='Enter')openLB(${i})">
+      ${p.src.startsWith('http')||p.src.match(/\.(jpg|png|webp)/i)
+        ?`<img src="${p.src}" alt="${currentLang==='es'?p.caption_es:p.caption_en}" loading="lazy">`
+        :p.src}
+      <span class="zoom-icon" aria-hidden="true">🔍</span>
+    </div>`).join('');
+}
+function openLB(idx){lbIdx=idx;document.getElementById('lightbox').classList.add('open');document.body.style.overflow='hidden';renderLB();}
+function renderLB(){
+  const p=ZONE_PHOTOS[lbIdx];
+  const cap=currentLang==='es'?p.caption_es:p.caption_en;
+  const isImg=p.src.startsWith('http')||p.src.match(/\.(jpg|png|webp)/i);
+  document.getElementById('lb-content').innerHTML=isImg
+    ?`<img class="lb-img" src="${p.src}" alt="${cap}">`
+    :`<div class="lb-emoji" role="img" aria-label="${cap}">${p.src}</div>`;
+  document.getElementById('lb-caption').textContent=cap;
+  document.getElementById('lb-counter').textContent=`${lbIdx+1} / ${ZONE_PHOTOS.length}`;
+  document.getElementById('lb-dots').innerHTML=ZONE_PHOTOS.map((_,i)=>
+    `<span class="lb-dot${i===lbIdx?' active':''}" onclick="lbGoTo(${i})" role="button" aria-label="Foto ${i+1}"></span>`
+  ).join('');
+}
+function lbMove(dir){lbIdx=(lbIdx+dir+ZONE_PHOTOS.length)%ZONE_PHOTOS.length;renderLB();}
+function lbGoTo(i){lbIdx=i;renderLB();}
+function closeLB(){document.getElementById('lightbox').classList.remove('open');document.body.style.overflow='';}
+document.getElementById('lightbox').addEventListener('click',e=>{if(e.target.id==='lightbox')closeLB();});
+
+const TOTAL_PHOTOS=5;let phIdx=0;
+function buildDots(){
+  document.getElementById('ph-dots').innerHTML=Array.from({length:TOTAL_PHOTOS},(_,i)=>
+    `<span class="ph-dot${i===0?' active':''}" onclick="phGoTo(${i})" role="button" aria-label="Foto ${i+1}"></span>`
+  ).join('');
+}
+function phGoTo(idx){phIdx=(idx+TOTAL_PHOTOS)%TOTAL_PHOTOS;document.getElementById('photo-slides').style.transform=`translateX(-${phIdx*100}%)`;document.getElementById('ph-counter').textContent=`${phIdx+1} / ${TOTAL_PHOTOS}`;document.querySelectorAll('.ph-dot').forEach((d,i)=>d.classList.toggle('active',i===phIdx));}
+function phMove(dir){phGoTo(phIdx+dir);}
+buildDots();
+
+const LANGS={
+  es:{nav_ubicaciones:"Ubicaciones",nav_ontalvilla:"Ontalvilla de Almazán",nav_benidorm:"Benidorm",nav_sobre:"Sobre nosotros",back_btn:"Volver a Benidorm",piso_name:"Piso 1",meta_beds:"Habitaciones",meta_baths:"Baños",meta_guests:"Huéspedes",sec_descripcion:"Descripción",piso_desc:"Moderno piso situado a tan solo 50 metros de la Playa de Levante. Cuenta con una amplia terraza desde la que se disfrutan vistas despejadas al mar Mediterráneo. El interior está totalmente reformado y equipado con todo lo necesario para una estancia cómoda. A cinco minutos a pie del centro de Benidorm, restaurantes y el paseo marítimo.",sec_equipamiento:"Equipamiento",feat_vistas:"Vistas al mar",feat_terraza:"Terraza exterior",feat_wifi:"WiFi gratuito",feat_ac:"Aire acondicionado",feat_cocina:"Cocina completa",feat_tv:"Smart TV",feat_lavadora:"Lavadora",feat_parking:"Parking cercano",sec_normas:"Normas del piso",piso_normas:"Entrada a partir de las 15:00 h · Salida antes de las 11:00 h · No se permiten fiestas ni eventos · Máximo 6 personas · No se admiten mascotas · Respetar el descanso de los vecinos.",price_per_night:"/ noche",price_note:"Precio orientativo. Consulta disponibilidad.",btn_call_reserve:"📞 Llamar para reservar",btn_whatsapp:"💬 WhatsApp",btn_email:"✉️ Email",otros_pisos:"Otros pisos en Benidorm",piso2:"Piso 2",piso3:"Piso 3",ver_piso:"Ver →",sec_galeria:"Descubre Benidorm",galeria_sub:"Benidorm y la Costa Blanca — haz clic en cualquier foto para ampliarla",footer:"© 2025 Alquileres · Todos los derechos reservados"},
+  en:{nav_ubicaciones:"Locations",nav_ontalvilla:"Ontalvilla de Almazán",nav_benidorm:"Benidorm",nav_sobre:"About us",back_btn:"Back to Benidorm",piso_name:"Apartment 1",meta_beds:"Bedrooms",meta_baths:"Bathrooms",meta_guests:"Guests",sec_descripcion:"Description",piso_desc:"Modern flat just 50 metres from Levante Beach. Features a large terrace with open views of the Mediterranean Sea. The interior has been fully renovated and is equipped with everything needed for a comfortable stay. Five minutes' walk from Benidorm's centre, restaurants and the seafront promenade.",sec_equipamiento:"Amenities",feat_vistas:"Sea views",feat_terraza:"Outdoor terrace",feat_wifi:"Free WiFi",feat_ac:"Air conditioning",feat_cocina:"Full kitchen",feat_tv:"Smart TV",feat_lavadora:"Washing machine",feat_parking:"Nearby parking",sec_normas:"Apartment rules",piso_normas:"Check-in from 15:00 · Check-out before 11:00 · No parties or events · Maximum 6 guests · No pets · Quiet hours to be respected.",price_per_night:"/ night",price_note:"Indicative price. Please check availability.",btn_call_reserve:"📞 Call to book",btn_whatsapp:"💬 WhatsApp",btn_email:"✉️ Email",otros_pisos:"Other apartments in Benidorm",piso2:"Apartment 2",piso3:"Apartment 3",ver_piso:"View →",sec_galeria:"Discover Benidorm",galeria_sub:"Benidorm and the Costa Blanca — click any photo to expand",footer:"© 2025 Alquileres · All rights reserved"}
+};
+function applyLang(lang){
+  const T=LANGS[lang]||LANGS.es;
+  currentLang=lang;
+  document.documentElement.lang=lang;
+  document.querySelectorAll('[data-i18n]').forEach(el=>{if(T[el.dataset.i18n]!==undefined)el.textContent=T[el.dataset.i18n];});
+  ['btn-es','mob-es'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.toggle('active',lang==='es');});
+  ['btn-en','mob-en'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.toggle('active',lang==='en');});
+  buildGallery();
+  localStorage.setItem('lang',lang);
+}
+function setLang(l){applyLang(l);}
+window.addEventListener('scroll',()=>document.getElementById('navbar').classList.toggle('solid',scrollY>60));
+function toggleDropdown(e){
+  e.stopPropagation();
+  const btn=document.getElementById('dd-btn'),menu=document.getElementById('dd-menu');
+  const open=menu.classList.toggle('open');btn.classList.toggle('open',open);btn.setAttribute('aria-expanded',open);
+}
+document.addEventListener('click',()=>{document.getElementById('dd-btn').classList.remove('open');document.getElementById('dd-menu').classList.remove('open');document.getElementById('dd-btn').setAttribute('aria-expanded','false');});
+function openMobile(){document.getElementById('mobile-menu').classList.add('open');document.body.style.overflow='hidden';}
+function closeMobile(){document.getElementById('mobile-menu').classList.remove('open');document.body.style.overflow='';}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeLB();closeMobile();}});
+applyLang(localStorage.getItem('lang')||'es');
+</script>
+</body>
+</html>
