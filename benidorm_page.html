@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Benidorm · Alquileres</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{--soria:#5c7a4e;--soria-light:#eaf2e5;--soria-dark:#3a4f30;--benidorm:#2a7ab8;--benidorm-light:#e5f1fb;--benidorm-dark:#1a4f78;--dark:#1a1a2e;--text:#333;--light:#f9f9f9}
+  body{font-family:'Segoe UI',sans-serif;color:var(--text);background:var(--light)}
+  a{text-decoration:none;color:inherit}
+  nav{position:fixed;top:0;width:100%;z-index:100;background:var(--benidorm-dark);box-shadow:0 2px 20px rgba(0,0,0,.2);padding:14px 5%}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between}
+  .logo{color:#fff;font-size:1.3rem;font-weight:700}
+  .nav-links{display:flex;gap:1.8rem;align-items:center}
+  .nav-links a{color:#fff;font-size:.95rem;transition:.2s}.nav-links a:hover{color:#90caf9}
+  .dropdown{position:relative}
+  .dropdown-btn{background:none;border:none;color:#fff;font-size:.95rem;cursor:pointer;display:flex;align-items:center;gap:5px;font-family:inherit;padding:0}.dropdown-btn:hover{color:#90caf9}
+  .arrow{transition:transform .25s}.dropdown-btn.open .arrow{transform:rotate(180deg)}
+  .dropdown-menu{display:none;position:absolute;top:140%;left:0;background:#fff;border-radius:10px;box-shadow:0 8px 25px rgba(0,0,0,.15);overflow:hidden;min-width:220px}
+  .dropdown-menu.open{display:block}
+  .dropdown-menu a{display:flex;align-items:center;justify-content:space-between;padding:13px 18px;font-size:.9rem;color:var(--text);transition:.2s;border-bottom:1px solid #f0f0f0}
+  .dropdown-menu a:last-child{border:none}.dropdown-menu a:hover{background:var(--light)}
+  .dd-badge{font-size:.7rem;padding:2px 8px;border-radius:10px;font-weight:600}
+  .dd-soria{background:var(--soria-light);color:var(--soria-dark)}.dd-benidorm{background:var(--benidorm-light);color:var(--benidorm-dark)}
+  .lang-switcher{display:flex;gap:.5rem;align-items:center}
+  .lang-btn{background:none;border:2px solid transparent;border-radius:6px;padding:3px 5px;cursor:pointer;opacity:.55;transition:.2s;display:flex;align-items:center;line-height:0}
+  .lang-btn:hover{opacity:1}.lang-btn.active{border-color:rgba(255,255,255,.7);opacity:1}
+  .lang-btn svg{width:26px;height:18px;border-radius:3px}
+  .hamburger{display:none;background:none;border:none;cursor:pointer;padding:4px;flex-direction:column;gap:5px}
+  .hamburger span{display:block;width:24px;height:2px;background:#fff;border-radius:2px}
+  .mobile-menu{display:none;position:fixed;top:0;left:0;width:100%;height:100vh;background:var(--dark);z-index:99;flex-direction:column;align-items:center;justify-content:center;gap:2rem}
+  .mobile-menu.open{display:flex}
+  .mobile-menu a{color:#fff;font-size:1.3rem}
+  .mobile-lang{display:flex;gap:1.2rem;margin-top:1rem;align-items:center}
+  .mobile-lang .lang-btn{padding:5px 7px}.mobile-lang .lang-btn svg{width:36px;height:24px}
+  .close-mobile{position:absolute;top:20px;right:5%;font-size:2rem;color:#fff;background:none;border:none;cursor:pointer}
+  .page-hero{padding:110px 5% 60px;text-align:center;background:linear-gradient(135deg,var(--benidorm-dark),var(--benidorm));color:#fff}
+  .page-hero h1{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;margin-bottom:.6rem}
+  .page-hero p{opacity:.85;max-width:520px;margin:0 auto;font-size:1.05rem}
+  .props-section{padding:60px 5%}
+  .props-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:2rem;max-width:1100px;margin:0 auto}
+  .prop-card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.08);transition:.3s}
+  .prop-card:hover{transform:translateY(-4px);box-shadow:0 10px 30px rgba(0,0,0,.14)}
+  .carousel{position:relative;height:220px;overflow:hidden;background:#d0e8f8;cursor:zoom-in}
+  .carousel-slides{display:flex;height:100%;transition:transform .4s ease}
+  .carousel-slide{min-width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:4rem;background:linear-gradient(135deg,#d0e8f8,#a8cef0);user-select:none}
+  .carousel-slide img{width:100%;height:100%;object-fit:cover;pointer-events:none}
+  .car-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.45);color:#fff;border:none;border-radius:50%;width:34px;height:34px;font-size:1.1rem;cursor:pointer;z-index:5;transition:.2s}
+  .car-btn:hover{background:rgba(0,0,0,.7)}.car-prev{left:10px}.car-next{right:10px}
+  .car-dots{position:absolute;bottom:8px;width:100%;display:flex;justify-content:center;gap:5px}
+  .car-dot{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.5);cursor:pointer;transition:.2s}.car-dot.active{background:#fff}
+  .zoom-hint{position:absolute;top:8px;right:8px;background:rgba(0,0,0,.4);color:#fff;font-size:.7rem;padding:3px 7px;border-radius:10px;pointer-events:none}
+  .prop-info{padding:1.2rem}
+  .prop-info h3{font-size:1.1rem;font-weight:700;margin-bottom:.3rem}
+  .prop-meta{display:flex;gap:1rem;font-size:.82rem;color:#777;margin-bottom:.6rem;flex-wrap:wrap}
+  .prop-desc{font-size:.87rem;color:#555;line-height:1.5;margin-bottom:.8rem}
+  .prop-price{font-size:1.2rem;font-weight:800;color:var(--benidorm-dark)}
+  .lightbox{display:none;position:fixed;inset:0;background:rgba(0,0,0,.92);z-index:999;align-items:center;justify-content:center}
+  .lightbox.open{display:flex}
+  .lb-inner{position:relative;max-width:90vw;max-height:90vh;display:flex;align-items:center;justify-content:center}
+  .lb-emoji{font-size:8rem;user-select:none}
+  .lb-close{position:fixed;top:20px;right:24px;background:none;border:none;color:#fff;font-size:2rem;cursor:pointer;z-index:1000;opacity:.8}.lb-close:hover{opacity:1}
+  .lb-arrow{position:fixed;top:50%;transform:translateY(-50%);background:rgba(255,255,255,.12);border:none;color:#fff;font-size:2rem;cursor:pointer;padding:12px 18px;border-radius:8px;transition:.2s;z-index:1000}.lb-arrow:hover{background:rgba(255,255,255,.25)}
+  .lb-prev{left:16px}.lb-next{right:16px}
+  .lb-counter{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);color:rgba(255,255,255,.7);font-size:.9rem}
+  .lb-dots{position:fixed;bottom:50px;left:50%;transform:translateX(-50%);display:flex;gap:8px}
+  .lb-dot{width:9px;height:9px;border-radius:50%;background:rgba(255,255,255,.35);cursor:pointer;transition:.2s}.lb-dot.active{background:#fff}
+  .map-section{padding:60px 5%;background:#fff}
+  .map-section h2{text-align:center;font-size:1.6rem;font-weight:700;margin-bottom:1.5rem}
+  .map-container{max-width:900px;margin:0 auto;border-radius:16px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.1);height:400px}
+  .map-container iframe{width:100%;height:100%;border:none}
+  .contact-section{background:var(--benidorm-light);padding:60px 5%;text-align:center}
+  .contact-section h2{font-size:1.6rem;font-weight:700;margin-bottom:.5rem}
+  .contact-section p{color:#555;margin-bottom:1.8rem;max-width:480px;margin-left:auto;margin-right:auto}
+  .contact-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+  .btn-benidorm{background:var(--benidorm);color:#fff;display:inline-block;padding:12px 28px;border-radius:50px;font-size:1rem;font-weight:600;transition:.25s;border:none}.btn-benidorm:hover{background:var(--benidorm-dark)}
+  .btn-outline-benidorm{background:transparent;color:var(--benidorm-dark);border:2px solid var(--benidorm);display:inline-block;padding:12px 28px;border-radius:50px;font-size:1rem;font-weight:600;transition:.25s}.btn-outline-benidorm:hover{background:var(--benidorm);color:#fff}
+  footer{background:var(--dark);color:rgba(255,255,255,.5);text-align:center;padding:1.5rem;font-size:.85rem}
+  .float-btn{position:fixed;bottom:28px;right:28px;z-index:200;background:var(--benidorm-dark);color:#fff;border:none;border-radius:50px;padding:14px 24px;font-size:.95rem;font-weight:700;cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,.3);transition:.3s}.float-btn:hover{background:#0d3256;transform:translateY(-2px)}
+  @media(max-width:768px){
+    .nav-links{display:none}.hamburger{display:flex}
+    .props-grid{grid-template-columns:1fr}
+    .map-container{height:280px}
+    .lb-arrow{padding:8px 12px;font-size:1.5rem}
+    .float-btn{bottom:16px;right:16px;padding:12px 18px;font-size:.85rem}
+  }
+</style>
+</head>
+<body>
+
+<button class="float-btn" onclick="document.getElementById('contacto').scrollIntoView({behavior:'smooth'})" aria-label="Ir a contacto">📞 <span data-i18n="float_btn">Contactar</span></button>
+
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Visor de fotos">
+  <button class="lb-close" onclick="closeLB()" aria-label="Cerrar visor">✕</button>
+  <button class="lb-arrow lb-prev" onclick="lbMove(-1)" aria-label="Foto anterior">‹</button>
+  <div class="lb-inner"><div id="lb-content" aria-live="polite"></div></div>
+  <button class="lb-arrow lb-next" onclick="lbMove(1)" aria-label="Foto siguiente">›</button>
+  <div class="lb-dots" id="lb-dots"></div>
+  <div class="lb-counter" id="lb-counter" aria-live="polite"></div>
+</div>
+
+<nav role="navigation" aria-label="Menú principal">
+  <div class="nav-inner">
+    <a href="index.html" class="logo" aria-label="Ir a la página principal">🏡 Alquileres</a>
+    <div class="nav-links">
+      <div class="dropdown">
+        <button class="dropdown-btn" id="dd-btn" onclick="toggleDropdown(event)" aria-haspopup="true" aria-expanded="false" aria-controls="dd-menu">
+          <span data-i18n="nav_ubicaciones">Ubicaciones</span> <span class="arrow" aria-hidden="true">▾</span>
+        </button>
+        <div class="dropdown-menu" id="dd-menu" role="menu">
+          <a href="ontalvilla-de-almazan.html" role="menuitem">🌿 <span data-i18n="nav_ontalvilla">Ontalvilla de Almazán</span> <span class="dd-badge dd-soria" data-i18n="badge_soria">Soria</span></a>
+          <a href="benidorm.html" role="menuitem">🌊 <span data-i18n="nav_benidorm">Benidorm</span> <span class="dd-badge dd-benidorm" data-i18n="badge_valencia">Valencia</span></a>
+        </div>
+      </div>
+      <a href="sobre-nosotros.html" data-i18n="nav_sobre">Sobre nosotros</a>
+      <div class="lang-switcher" role="group" aria-label="Seleccionar idioma">
+        <button class="lang-btn active" id="btn-es" onclick="setLang('es')" aria-label="Cambiar idioma a Español" title="Español">
+          <svg viewBox="0 0 60 40" aria-hidden="true"><rect width="60" height="40" fill="#c60b1e"/><rect y="10" width="60" height="20" fill="#ffc400"/></svg>
+        </button>
+        <button class="lang-btn" id="btn-en" onclick="setLang('en')" aria-label="Change language to English" title="English">
+          <svg viewBox="0 0 60 40" aria-hidden="true"><rect width="60" height="40" fill="#012169"/><path d="M0,0 L60,40 M60,0 L0,40" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,40 M60,0 L0,40" stroke="#C8102E" stroke-width="4"/><path d="M30,0 V40 M0,20 H60" stroke="#fff" stroke-width="10"/><path d="M30,0 V40 M0,20 H60" stroke="#C8102E" stroke-width="6"/></svg>
+        </button>
+      </div>
+    </div>
+    <button class="hamburger" onclick="openMobile()" aria-label="Abrir menú" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true">
+  <button class="close-mobile" onclick="closeMobile()" aria-label="Cerrar menú">✕</button>
+  <a href="ontalvilla-de-almazan.html">🌿 <span data-i18n="nav_ontalvilla">Ontalvilla de Almazán</span></a>
+  <a href="benidorm.html">🌊 <span data-i18n="nav_benidorm">Benidorm</span></a>
+  <a href="sobre-nosotros.html" data-i18n="nav_sobre">Sobre nosotros</a>
+  <div class="mobile-lang">
+    <button class="lang-btn active" id="mob-es" onclick="setLang('es');closeMobile()" aria-label="Cambiar a Español" title="Español">
+      <svg viewBox="0 0 60 40" aria-hidden="true"><rect width="60" height="40" fill="#c60b1e"/><rect y="10" width="60" height="20" fill="#ffc400"/></svg>
+    </button>
+    <button class="lang-btn" id="mob-en" onclick="setLang('en');closeMobile()" aria-label="Switch to English" title="English">
+      <svg viewBox="0 0 60 40" aria-hidden="true"><rect width="60" height="40" fill="#012169"/><path d="M0,0 L60,40 M60,0 L0,40" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,40 M60,0 L0,40" stroke="#C8102E" stroke-width="4"/><path d="M30,0 V40 M0,20 H60" stroke="#fff" stroke-width="10"/><path d="M30,0 V40 M0,20 H60" stroke="#C8102E" stroke-width="6"/></svg>
+    </button>
+  </div>
+</div>
+
+<main>
+  <header class="page-hero">
+    <h1>🌊 <span data-i18n="nav_benidorm">Benidorm</span></h1>
+    <p>Alicante · Valencia</p>
+  </header>
+
+  <div class="props-section">
+    <div class="props-grid" id="props-container"></div>
+  </div>
+
+  <section class="map-section" aria-labelledby="map-title-ben">
+    <h2 id="map-title-ben" data-i18n="map_title_benidorm">¿Dónde estamos? · Benidorm</h2>
+    <div class="map-container">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3124.5!2d-0.1326!3d38.5336!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd6202b5e4b0e6b7%3A0x0!2sBenidorm%2C+Alicante!5e0!3m2!1ses!2ses!4v1"
+        allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        title="Mapa de Benidorm, Alicante" aria-label="Mapa de Google con la ubicación de Benidorm">
+      </iframe>
+    </div>
+  </section>
+
+  <section class="contact-section" id="contacto" aria-labelledby="contact-title-ben">
+    <h2 id="contact-title-ben" data-i18n="prop_contact_title">¿Te interesa alguna propiedad?</h2>
+    <p data-i18n="prop_contact_sub_benidorm">Contacta con Laura para reservar o resolver cualquier duda.</p>
+    <div class="contact-btns">
+      <a href="tel:+34600000002" class="btn-benidorm" aria-label="Llamar a Laura" data-i18n="btn_call">📞 Llamar</a>
+      <a href="https://wa.me/34600000002" target="_blank" rel="noopener" class="btn-benidorm" aria-label="WhatsApp Benidorm" data-i18n="btn_whatsapp">💬 WhatsApp</a>
+      <a href="mailto:benidorm@alquileres.es" class="btn-outline-benidorm" aria-label="Email Benidorm" data-i18n="btn_email">✉️ Email</a>
+    </div>
+  </section>
+</main>
+
+<footer role="contentinfo"><p data-i18n="footer">© 2025 Alquileres · Todos los derechos reservados</p></footer>
+
+<script>
+const LANGS={
+  es:{
+    nav_ubicaciones:"Ubicaciones",nav_ontalvilla:"Ontalvilla de Almazán",nav_benidorm:"Benidorm",nav_sobre:"Sobre nosotros",badge_soria:"Soria",badge_valencia:"Valencia",
+    map_title_benidorm:"¿Dónde estamos? · Benidorm",
+    prop_contact_title:"¿Te interesa alguna propiedad?",prop_contact_sub_benidorm:"Contacta con Laura para reservar o resolver cualquier duda sobre nuestros alojamientos en Benidorm.",
+    btn_call:"📞 Llamar",btn_whatsapp:"💬 WhatsApp",btn_email:"✉️ Email",
+    prop_beds:"hab.",prop_baths:"baños",zoom_hint:"🔍 Ampliar",night:"noche",
+    float_btn:"Contactar",footer:"© 2025 Alquileres · Todos los derechos reservados",
+    props:[
+      {name:"Piso Playa de Levante",desc:"Moderno piso a 50m de la playa, con terraza y vistas al mar. Totalmente equipado.",price:"140"},
+      {name:"Apartamento Centro",desc:"Céntrico y luminoso, a pasos de los mejores restaurantes y el paseo marítimo.",price:"90"},
+      {name:"Estudio Vista Mar",desc:"Acogedor estudio con vistas despejadas al Mediterráneo. Perfecto para escapadas en pareja.",price:"65"}
+    ]
+  },
+  en:{
+    nav_ubicaciones:"Locations",nav_ontalvilla:"Ontalvilla de Almazán",nav_benidorm:"Benidorm",nav_sobre:"About us",badge_soria:"Soria",badge_valencia:"Valencia",
+    map_title_benidorm:"Where are we? · Benidorm",
+    prop_contact_title:"Interested in a property?",prop_contact_sub_benidorm:"Contact Laura to book or resolve any questions about our Benidorm accommodation.",
+    btn_call:"📞 Call",btn_whatsapp:"💬 WhatsApp",btn_email:"✉️ Email",
+    prop_beds:"bed.",prop_baths:"baths",zoom_hint:"🔍 Expand",night:"night",
+    float_btn:"Contact",footer:"© 2025 Alquileres · All rights reserved",
+    props:[
+      {name:"Levante Beach Apartment",desc:"Modern flat 50m from the beach, with terrace and sea views. Fully equipped.",price:"140"},
+      {name:"City Centre Apartment",desc:"Central and bright, steps from the best restaurants and the seafront promenade.",price:"90"},
+      {name:"Sea View Studio",desc:"Cosy studio with clear views of the Mediterranean. Perfect for a couple's getaway.",price:"65"}
+    ]
+  }
+};
+
+const PROPS_BASE=[
+  {beds:3,baths:2,m2:85,photos:["🌊","🏖️","🌞"]},
+  {beds:2,baths:1,m2:60,photos:["🏙️","🌴","🍽️"]},
+  {beds:1,baths:1,m2:40,photos:["🌅","💙","⛵"]},
+];
+
+const cState={};
+
+function buildCards(lang){
+  const T=LANGS[lang];
+  return PROPS_BASE.map((base,i)=>{
+    const p=T.props[i];
+    const id=`b${i}`;
+    cState[id]={idx:0,total:base.photos.length,photos:base.photos,name:p.name};
+    const slides=base.photos.map((ph,j)=>
+      `<div class="carousel-slide" role="img" aria-label="Foto ${j+1} de ${p.name}">${ph}</div>`
+    ).join('');
+    const dots=base.photos.map((_,j)=>
+      `<span class="car-dot${j===0?' active':''}" onclick="carGo('${id}',${j})" role="button" aria-label="Foto ${j+1}"></span>`
+    ).join('');
+    return `
+      <article class="prop-card" aria-label="${p.name}">
+        <div class="carousel" id="car-${id}"
+          onclick="openLB('${id}',cState['${id}'].idx)"
+          tabindex="0" role="button" aria-label="Fotos de ${p.name} — pulsa para ampliar"
+          onkeydown="if(event.key==='Enter')openLB('${id}',cState['${id}'].idx)">
+          <div class="carousel-slides" id="slides-${id}">${slides}</div>
+          ${base.photos.length>1
+            ?`<button class="car-btn car-prev" onclick="event.stopPropagation();carMove('${id}',-1)" aria-label="Foto anterior">‹</button>
+              <button class="car-btn car-next" onclick="event.stopPropagation();carMove('${id}',1)" aria-label="Foto siguiente">›</button>`:''}
+          <div class="car-dots" onclick="event.stopPropagation()">${dots}</div>
+          <div class="zoom-hint" aria-hidden="true" data-zoom="${id}">${T.zoom_hint}</div>
+        </div>
+        <div class="prop-info">
+          <h3 class="prop-name-${i}">${p.name}</h3>
+          <div class="prop-meta">
+            <span>🛏 ${base.beds} <span data-i18n="prop_beds">${T.prop_beds}</span></span>
+            <span>🚿 ${base.baths} <span data-i18n="prop_baths">${T.prop_baths}</span></span>
+            <span>📐 ${base.m2} m²</span>
+          </div>
+          <p class="prop-desc prop-desc-${i}">${p.desc}</p>
+          <div class="prop-price">${p.price}€/<span data-i18n="night">${T.night}</span></div>
+        </div>
+      </article>`;
+  }).join('');
+}
+
+function renderProps(lang){
+  document.getElementById('props-container').innerHTML=buildCards(lang);
+}
+
+function updateProps(lang){
+  const T=LANGS[lang];
+  PROPS_BASE.forEach((_,i)=>{
+    const p=T.props[i];
+    const nameEl=document.querySelector(`.prop-name-${i}`);
+    const descEl=document.querySelector(`.prop-desc-${i}`);
+    if(nameEl)nameEl.textContent=p.name;
+    if(descEl)descEl.textContent=p.desc;
+  });
+  document.querySelectorAll('[data-i18n="night"]').forEach(el=>el.textContent=T.night);
+  document.querySelectorAll('[data-i18n="prop_beds"]').forEach(el=>el.textContent=T.prop_beds);
+  document.querySelectorAll('[data-i18n="prop_baths"]').forEach(el=>el.textContent=T.prop_baths);
+  document.querySelectorAll('[data-zoom]').forEach(el=>el.textContent=T.zoom_hint);
+}
+
+/* CAROUSEL */
+function carMove(id,dir){const s=cState[id];s.idx=(s.idx+dir+s.total)%s.total;applyC(id,s.idx);}
+function carGo(id,idx){cState[id].idx=idx;applyC(id,idx);}
+function applyC(id,idx){
+  document.getElementById(`slides-${id}`).style.transform=`translateX(-${idx*100}%)`;
+  document.querySelectorAll(`#car-${id} .car-dot`).forEach((d,i)=>d.classList.toggle('active',i===idx));
+}
+
+/* LIGHTBOX */
+let lbId=null;
+function openLB(id,idx){lbId=id;cState[id].idx=idx;document.getElementById('lightbox').classList.add('open');document.body.style.overflow='hidden';renderLB();}
+function renderLB(){
+  const s=cState[lbId],ph=s.photos[s.idx];
+  document.getElementById('lb-content').innerHTML=`<div class="lb-emoji" role="img" aria-label="Foto ${s.idx+1} de ${s.name}">${ph}</div>`;
+  document.getElementById('lb-counter').textContent=`${s.idx+1} / ${s.total}`;
+  document.getElementById('lb-dots').innerHTML=s.photos.map((_,i)=>`<span class="lb-dot${i===s.idx?' active':''}" onclick="lbGo(${i})" role="button" aria-label="Foto ${i+1}"></span>`).join('');
+  applyC(lbId,s.idx);
+}
+function lbMove(dir){const s=cState[lbId];s.idx=(s.idx+dir+s.total)%s.total;renderLB();}
+function lbGo(i){cState[lbId].idx=i;renderLB();}
+function closeLB(){document.getElementById('lightbox').classList.remove('open');document.body.style.overflow='';}
+document.getElementById('lightbox').addEventListener('click',e=>{if(e.target.id==='lightbox')closeLB();});
+
+/* i18n */
+function applyLang(lang){
+  const T=LANGS[lang]||LANGS.es;
+  document.documentElement.lang=lang;
+  document.querySelectorAll('[data-i18n]').forEach(el=>{if(T[el.dataset.i18n]!==undefined)el.textContent=T[el.dataset.i18n];});
+  updateProps(lang);
+  ['btn-es','mob-es'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.toggle('active',lang==='es');});
+  ['btn-en','mob-en'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.toggle('active',lang==='en');});
+  localStorage.setItem('lang',lang);
+}
+function setLang(l){applyLang(l);}
+
+/* NAV */
+function toggleDropdown(e){
+  e.stopPropagation();
+  const btn=document.getElementById('dd-btn'),menu=document.getElementById('dd-menu');
+  const open=menu.classList.toggle('open');btn.classList.toggle('open',open);btn.setAttribute('aria-expanded',open);
+}
+document.addEventListener('click',()=>{document.getElementById('dd-btn').classList.remove('open');document.getElementById('dd-menu').classList.remove('open');document.getElementById('dd-btn').setAttribute('aria-expanded','false');});
+function openMobile(){document.getElementById('mobile-menu').classList.add('open');document.body.style.overflow='hidden';}
+function closeMobile(){document.getElementById('mobile-menu').classList.remove('open');document.body.style.overflow='';}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeLB();closeMobile();}});
+
+const initLang=localStorage.getItem('lang')||'es';
+renderProps(initLang);
+applyLang(initLang);
+</script>
+</body>
+</html>

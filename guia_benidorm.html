@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guía de Benidorm · Alquileres</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{--soria:#5c7a4e;--soria-light:#eaf2e5;--soria-dark:#3a4f30;--benidorm:#2a7ab8;--benidorm-light:#e5f1fb;--benidorm-dark:#1a4f78;--dark:#1a1a2e;--text:#333;--light:#f9f9f9}
+  body{font-family:'Segoe UI',sans-serif;color:var(--text);background:var(--light)}
+  a{text-decoration:none;color:inherit}
+
+  /* NAV — idéntico al resto */
+  nav{position:fixed;top:0;width:100%;z-index:100;background:var(--benidorm-dark);box-shadow:0 2px 20px rgba(0,0,0,.2);padding:14px 5%}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between}
+  .logo{color:#fff;font-size:1.3rem;font-weight:700}
+  .nav-links{display:flex;gap:1.8rem;align-items:center}
+  .nav-links a{color:#fff;font-size:.95rem;transition:.2s}.nav-links a:hover{color:#90caf9}
+  .dropdown{position:relative}
+  .dropdown-btn{background:none;border:none;color:#fff;font-size:.95rem;cursor:pointer;display:flex;align-items:center;gap:5px;font-family:inherit;padding:0}.dropdown-btn:hover{color:#90caf9}
+  .arrow{transition:transform .25s}.dropdown-btn.open .arrow{transform:rotate(180deg)}
+  .dropdown-menu{display:none;position:absolute;top:140%;left:0;background:#fff;border-radius:10px;box-shadow:0 8px 25px rgba(0,0,0,.15);overflow:hidden;min-width:220px}
+  .dropdown-menu.open{display:block}
+  .dropdown-menu a{display:flex;align-items:center;justify-content:space-between;padding:13px 18px;font-size:.9rem;color:var(--text);transition:.2s;border-bottom:1px solid #f0f0f0}
+  .dropdown-menu a:last-child{border:none}.dropdown-menu a:hover{background:var(--light)}
+  .dd-badge{font-size:.7rem;padding:2px 8px;border-radius:10px;font-weight:600}
+  .dd-soria{background:var(--soria-light);color:var(--soria-dark)}.dd-benidorm{background:var(--benidorm-light);color:var(--benidorm-dark)}
+  .lang-switcher{display:flex;gap:.5rem;align-items:center}
+  .lang-btn{background:none;border:2px solid transparent;border-radius:6px;padding:3px 5px;cursor:pointer;opacity:.55;transition:.2s;display:flex;align-items:center;line-height:0}
+  .lang-btn:hover{opacity:1}.lang-btn.active{border-color:rgba(255,255,255,.7);opacity:1}
+  .lang-btn svg{width:26px;height:18px;border-radius:3px}
+  .hamburger{display:none;background:none;border:none;cursor:pointer;padding:4px;flex-direction:column;gap:5px}
+  .hamburger span{display:block;width:24px;height:2px;background:#fff;border-radius:2px}
+  .mobile-menu{display:none;position:fixed;top:0;left:0;width:100%;height:100vh;background:var(--dark);z-index:99;flex-direction:column;align-items:center;justify-content:center;gap:2rem}
+  .mobile-menu.open{display:flex}
+  .mobile-menu a{color:#fff;font-size:1.3rem}
+  .mobile-lang{display:flex;gap:1.2rem;margin-top:1rem;align-items:center}
+  .mobile-lang .lang-btn{padding:5px 7px}.mobile-lang .lang-btn svg{width:36px;height:24px}
+  .close-mobile{position:absolute;top:20px;right:5%;font-size:2rem;color:#fff;background:none;border:none;cursor:pointer}
+
+  .page-hero{padding:110px 5% 60px;text-align:center;background:linear-gradient(135deg,var(--benidorm-dark),var(--benidorm));color:#fff}
+  .page-hero h1{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:800;margin-bottom:.6rem}
+  .page-hero p{opacity:.85;max-width:560px;margin:0 auto 1.5rem;font-size:1.05rem}
+  .back-link{display:inline-flex;align-items:center;gap:.4rem;color:rgba(255,255,255,.8);font-size:.9rem;border:1px solid rgba(255,255,255,.4);padding:7px 16px;border-radius:50px;transition:.2s}.back-link:hover{background:rgba(255,255,255,.15);color:#fff}
+
+  /* TABS — con espacio generoso debajo */
+  .guide-tabs{display:flex;justify-content:center;gap:1rem;padding:36px 5%;flex-wrap:wrap}
+  .tab-btn{padding:10px 22px;border-radius:50px;border:2px solid var(--benidorm);background:#fff;color:var(--benidorm-dark);font-size:.9rem;font-weight:600;cursor:pointer;transition:.2s}
+  .tab-btn.active,.tab-btn:hover{background:var(--benidorm);color:#fff}
+
+  .guide-section{display:none;padding:10px 5% 60px;max-width:1000px;margin:0 auto}
+  .guide-section.active{display:block}
+  .guide-section h2{font-size:1.6rem;font-weight:700;margin-bottom:2rem;color:var(--benidorm-dark)}
+
+  .place-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.5rem}
+  .place-card{background:#fff;border-radius:14px;padding:1.5rem;box-shadow:0 3px 16px rgba(0,0,0,.08);border-left:4px solid var(--benidorm);transition:.3s}
+  .place-card:hover{transform:translateY(-3px);box-shadow:0 8px 24px rgba(0,0,0,.12)}
+  .place-icon{font-size:2rem;margin-bottom:.6rem}
+  .place-card h3{font-size:1rem;font-weight:700;margin-bottom:.4rem}
+  .place-card p{font-size:.88rem;color:#555;line-height:1.6;margin-bottom:.6rem}
+  .place-tag{display:inline-block;font-size:.72rem;padding:2px 9px;border-radius:10px;font-weight:600;background:var(--benidorm-light);color:var(--benidorm-dark)}
+  .place-dist{font-size:.78rem;color:#888;margin-top:.4rem}
+
+  .route-card{background:#fff;border-radius:14px;padding:1.5rem;box-shadow:0 3px 16px rgba(0,0,0,.08);margin-bottom:1.2rem;display:grid;grid-template-columns:auto 1fr;gap:1.2rem;align-items:start;transition:.3s}
+  .route-card:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(0,0,0,.12)}
+  .route-badge{background:var(--benidorm);color:#fff;border-radius:10px;padding:.6rem 1rem;text-align:center;min-width:80px}
+  .route-badge .diff{font-size:.75rem;font-weight:700;text-transform:uppercase}
+  .route-badge .km{font-size:1.3rem;font-weight:800;line-height:1}
+  .route-badge small{font-size:.7rem;opacity:.8}
+  .route-info h3{font-size:1rem;font-weight:700;margin-bottom:.3rem}
+  .route-info p{font-size:.88rem;color:#555;line-height:1.6}
+  .route-meta{display:flex;gap:1rem;margin-top:.5rem;font-size:.8rem;color:#777;flex-wrap:wrap}
+
+  /* CONTACTO — mismo estilo que el resto de páginas */
+  #contacto{background:#fff;padding:70px 5%}
+  .section-title{text-align:center;margin-bottom:50px}
+  .section-title h2{font-size:2rem;font-weight:700;margin-bottom:.5rem}
+  .section-title p{color:#666;max-width:550px;margin:0 auto}
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;max-width:900px;margin:0 auto}
+  .contact-card{border-radius:16px;padding:2rem;text-align:center}
+  .contact-soria{background:var(--soria-light);border:2px solid var(--soria)}.contact-benidorm{background:var(--benidorm-light);border:2px solid var(--benidorm)}
+  .contact-card h3{font-size:1.2rem;font-weight:700;margin-bottom:.3rem}
+  .location-label{font-size:.85rem;color:#666;margin-bottom:1.2rem}
+  .contact-item{display:flex;align-items:center;gap:.8rem;padding:.7rem;background:#fff;border-radius:10px;margin-bottom:.7rem;text-align:left}
+  .contact-icon{font-size:1.3rem;width:32px;text-align:center}
+  .contact-item a{font-size:.9rem;color:var(--text);font-weight:500}.contact-item a:hover{text-decoration:underline}
+
+  footer{background:var(--dark);color:rgba(255,255,255,.5);text-align:center;padding:1.5rem;font-size:.85rem}
+  .float-btn{position:fixed;bottom:28px;right:28px;z-index:200;background:var(--benidorm-dark);color:#fff;border:none;border-radius:50px;padding:14px 24px;font-size:.95rem;font-weight:700;cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,.3);transition:.3s}.float-btn:hover{background:#0d3256;transform:translateY(-2px)}
+
+  @media(max-width:768px){
+    .nav-links{display:none}.hamburger{display:flex}
+    .place-grid{grid-template-columns:1fr}
+    .route-card{grid-template-columns:1fr}
+    .contact-grid{grid-template-columns:1fr}
+    .float-btn{bottom:16px;right:16px;padding:12px 18px;font-size:.85rem}
+  }
+</style>
+</head>
+<body>
+
+<button class="float-btn" onclick="document.getElementById('contacto').scrollIntoView({behavior:'smooth'})" aria-label="Ir a contacto">📞 <span data-i18n="float_btn">Contactar</span></button>
+
+<nav role="navigation" aria-label="Menú principal">
+  <div class="nav-inner">
+    <a href="index.html" class="logo" aria-label="Ir a la página principal">🏡 Alquileres</a>
+    <div class="nav-links">
+      <div class="dropdown">
+        <button class="dropdown-btn" id="dd-btn" onclick="toggleDropdown(event)" aria-haspopup="true" aria-expanded="false" aria-controls="dd-menu">
+          <span data-i18n="nav_ubicaciones">Ubicaciones</span> <span class="arrow" aria-hidden="true">▾</span>
+        </button>
+        <div class="dropdown-menu" id="dd-menu" role="menu">
+          <a href="ontalvilla-de-almazan.html" role="menuitem">🌿 <span data-i18n="nav_ontalvilla">Ontalvilla de Almazán</span> <span class="dd-badge dd-soria" data-i18n="badge_soria">Soria</span></a>
+          <a href="benidorm.html" role="menuitem">🌊 <span data-i18n="nav_benidorm">Benidorm</span> <span class="dd-badge dd-benidorm" data-i18n="badge_valencia">Valencia</span></a>
+        </div>
+      </div>
+      <a href="sobre-nosotros.html" data-i18n="nav_sobre">Sobre nosotros</a>
+      <div class="lang-switcher" role="group" aria-label="Seleccionar idioma">
+        <button class="lang-btn active" id="btn-es" onclick="setLang('es')" aria-label="Cambiar idioma a Español" title="Español">
+          <svg viewBox="0 0 60 40" aria-hidden="true"><rect width="60" height="40" fill="#c60b1e"/><rect y="10" width="60" height="20" fill="#ffc400"/></svg>
+        </button>
+        <button class="lang-btn" id="btn-en" onclick="setLang('en')" aria-label="Change language to English" title="English">
+          <svg viewBox="0 0 60 40" aria-hidden="true"><rect width="60" height="40" fill="#012169"/><path d="M0,0 L60,40 M60,0 L0,40" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,40 M60,0 L0,40" stroke="#C8102E" stroke-width="4"/><path d="M30,0 V40 M0,20 H60" stroke="#fff" stroke-width="10"/><path d="M30,0 V40 M0,20 H60" stroke="#C8102E" stroke-width="6"/></svg>
+        </button>
+      </div>
+    </div>
+    <button class="hamburger" onclick="openMobile()" aria-label="Abrir menú" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true">
+  <button class="close-mobile" onclick="closeMobile()" aria-label="Cerrar menú">✕</button>
+  <a href="ontalvilla-de-almazan.html">🌿 <span data-i18n="nav_ontalvilla">Ontalvilla de Almazán</span></a>
+  <a href="benidorm.html">🌊 <span data-i18n="nav_benidorm">Benidorm</span></a>
+  <a href="sobre-nosotros.html" data-i18n="nav_sobre">Sobre nosotros</a>
+  <div class="mobile-lang">
+    <button class="lang-btn active" id="mob-es" onclick="setLang('es');closeMobile()" aria-label="Cambiar a Español" title="Español">
+      <svg viewBox="0 0 60 40" aria-hidden="true"><rect width="60" height="40" fill="#c60b1e"/><rect y="10" width="60" height="20" fill="#ffc400"/></svg>
+    </button>
+    <button class="lang-btn" id="mob-en" onclick="setLang('en');closeMobile()" aria-label="Switch to English" title="English">
+      <svg viewBox="0 0 60 40" aria-hidden="true"><rect width="60" height="40" fill="#012169"/><path d="M0,0 L60,40 M60,0 L0,40" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,40 M60,0 L0,40" stroke="#C8102E" stroke-width="4"/><path d="M30,0 V40 M0,20 H60" stroke="#fff" stroke-width="10"/><path d="M30,0 V40 M0,20 H60" stroke="#C8102E" stroke-width="6"/></svg>
+    </button>
+  </div>
+</div>
+
+<main>
+  <header class="page-hero">
+    <h1>🗺️ <span data-i18n="guia_benidorm_title">Guía de Benidorm</span></h1>
+    <p data-i18n="guia_benidorm_sub">Todo lo que necesitas saber para disfrutar al máximo de tu estancia en la Costa Blanca</p>
+    <a href="benidorm.html" class="back-link" data-i18n="guia_back">← Volver a propiedades</a>
+  </header>
+
+  <nav class="guide-tabs" aria-label="Secciones de la guía">
+    <button class="tab-btn active" onclick="showTab('comer',event)" data-i18n="guia_comer_title">Dónde comer</button>
+    <button class="tab-btn" onclick="showTab('ver',event)" data-i18n="guia_ver_title">Qué ver</button>
+    <button class="tab-btn" onclick="showTab('rutas',event)" data-i18n="guia_rutas_title">Rutas y senderismo</button>
+  </nav>
+
+  <section class="guide-section active" id="tab-comer" aria-label="Dónde comer en Benidorm">
+    <h2 data-i18n="guia_comer_title">Dónde comer</h2>
+    <div class="place-grid">
+      <div class="place-card"><div class="place-icon" aria-hidden="true">🦞</div><h3>Restaurante La Olla — Paseo Colón</h3><p>Referencia local para arroces y mariscos. El arroz a banda y la fideuà son sus especialidades. Terraza frente al mar. Reserva recomendable.</p><span class="place-tag">Arroces · Mariscos</span><p class="place-dist">📍 Playa de Levante</p></div>
+      <div class="place-card"><div class="place-icon" aria-hidden="true">🍷</div><h3>Tiffany's Restaurant</h3><p>Uno de los restaurantes más emblemáticos de Benidorm, con espectáculos en vivo. Cocina internacional de calidad en un ambiente único.</p><span class="place-tag">Internacional · Show</span><p class="place-dist">📍 Centro</p></div>
+      <div class="place-card"><div class="place-icon" aria-hidden="true">🐟</div><h3>Pescadería El Faro</h3><p>Local sencillo y honesto donde los pescadores locales traen el género cada mañana. El pescado a la plancha no tiene rival.</p><span class="place-tag">Pescado fresco</span><p class="place-dist">📍 Puerto pesquero</p></div>
+      <div class="place-card"><div class="place-icon" aria-hidden="true">☕</div><h3>Horchatería El Siglo — Rincón de Loix</h3><p>La mejor horchata con fartons de la zona. Desayunos típicos valencianos. Imprescindible si nunca has probado la horchata de chufa auténtica.</p><span class="place-tag">Desayunos · Horchata</span><p class="place-dist">📍 Rincón de Loix</p></div>
+    </div>
+  </section>
+
+  <section class="guide-section" id="tab-ver" aria-label="Qué ver en Benidorm">
+    <h2 data-i18n="guia_ver_title">Qué ver</h2>
+    <div class="place-grid">
+      <div class="place-card"><div class="place-icon" aria-hidden="true">🏖️</div><h3>Playa de Levante</h3><p>Una de las playas más conocidas del Mediterráneo. Bandera azul, aguas tranquilas y paseo con todos los servicios.</p><span class="place-tag">Playa · Paseo</span><p class="place-dist">📍 Centro de Benidorm</p></div>
+      <div class="place-card"><div class="place-icon" aria-hidden="true">🏔️</div><h3>Peñón de Ifach — Calpe</h3><p>Impresionante roca caliza declarada Parque Natural. La ascensión ofrece vistas espectaculares del litoral.</p><span class="place-tag">Parque Natural</span><p class="place-dist">📍 ~25 km</p></div>
+      <div class="place-card"><div class="place-icon" aria-hidden="true">🏰</div><h3>Casco Antiguo de Benidorm</h3><p>Calles estrechas, la iglesia de San Jaime y vistas panorámicas desde el mirador. La esencia del pueblo pescador original.</p><span class="place-tag">Patrimonio · Miradores</span><p class="place-dist">📍 Centro histórico</p></div>
+      <div class="place-card"><div class="place-icon" aria-hidden="true">🌴</div><h3>Isla de Benidorm</h3><p>Reserva Natural a solo 2 km de la costa. Visita en barco desde el puerto. Snorkel con aguas cristalinas.</p><span class="place-tag">Reserva Natural</span><p class="place-dist">📍 Frente a Benidorm</p></div>
+      <div class="place-card"><div class="place-icon" aria-hidden="true">🕌</div><h3>Guadalest — Pueblo medieval</h3><p>Uno de los pueblos más visitados de España. Encaramado en una roca, con castillo árabe y vistas al embalse.</p><span class="place-tag">Patrimonio · Pueblo</span><p class="place-dist">📍 ~20 km</p></div>
+      <div class="place-card"><div class="place-icon" aria-hidden="true">🎡</div><h3>Terra Mítica</h3><p>El gran parque temático del Mediterráneo. Perfecto para familias con niños o para una jornada de aventura.</p><span class="place-tag">Ocio · Familias</span><p class="place-dist">📍 A 5 min en coche</p></div>
+    </div>
+  </section>
+
+  <section class="guide-section" id="tab-rutas" aria-label="Rutas desde Benidorm">
+    <h2 data-i18n="guia_rutas_title">Rutas y senderismo</h2>
+    <div>
+      <div class="route-card"><div class="route-badge"><div class="diff">Fácil</div><div class="km">5<small>km</small></div></div><div class="route-info"><h3>Paseo del Mal Pas — Sierra Helada</h3><p>Ruta costera por el Parque Natural de Sierra Helada con vistas al mar y a los rascacielos de Benidorm desde los acantilados.</p><div class="route-meta"><span>⏱ ~1h 30min</span><span>↕ +80m</span><span>➡ Lineal</span></div></div></div>
+      <div class="route-card"><div class="route-badge" style="background:var(--benidorm-dark)"><div class="diff">Media</div><div class="km">14<small>km</small></div></div><div class="route-info"><h3>Circular Sierra Helada — Cala de Finestrat</h3><p>Recorrido completo por el Parque Natural pasando por calas escondidas y miradores. Llevar agua suficiente.</p><div class="route-meta"><span>⏱ ~4h</span><span>↕ +320m</span><span>🔁 Circular</span></div></div></div>
+      <div class="route-card"><div class="route-badge"><div class="diff">Fácil</div><div class="km">4<small>km</small></div></div><div class="route-info"><h3>Ruta al Castillo de Guadalest</h3><p>Desde el aparcamiento del pueblo, un paseo corto hasta la fortaleza árabe. Apto para toda la familia.</p><div class="route-meta"><span>⏱ ~1h 15min</span><span>↕ +120m</span><span>🔁 Circular</span></div></div></div>
+      <div class="route-card"><div class="route-badge" style="background:#7a3e3e"><div class="diff">Difícil</div><div class="km">9<small>km</small></div></div><div class="route-info"><h3>Ascensión al Peñón de Ifach — Calpe</h3><p>Ruta exigente con tramo de escalada asistida. La cima a 332m ofrece una vista de 360° del litoral alicantino.</p><div class="route-meta"><span>⏱ ~3h</span><span>↕ +330m</span><span>🔁 Circular</span></div></div></div>
+    </div>
+  </section>
+
+  <!-- CONTACTO — mismo estilo que el resto de páginas -->
+  <section id="contacto" aria-labelledby="contacto-guia-title">
+    <div class="section-title">
+      <h2 id="contacto-guia-title" data-i18n="sec_contacto_title">Contacto</h2>
+      <p data-i18n="sec_contacto_sub">Escríbenos o llámanos, estaremos encantados de atenderte</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-card contact-soria" role="region" aria-label="Contacto Ontalvilla de Almazán">
+        <h3>🌿 <span data-i18n="nav_ontalvilla">Ontalvilla de Almazán</span></h3>
+        <p class="location-label" data-i18n="contacto_soria_label">Soria, Castilla y León</p>
+        <div class="contact-item"><span class="contact-icon" aria-hidden="true">📞</span><a href="tel:+34600000001" aria-label="Llamar a Miguel">+34 600 000 001</a></div>
+        <div class="contact-item"><span class="contact-icon" aria-hidden="true">✉️</span><a href="mailto:soria@alquileres.es">soria@alquileres.es</a></div>
+        <div class="contact-item"><span class="contact-icon" aria-hidden="true">💬</span><a href="https://wa.me/34600000001" target="_blank" rel="noopener" data-i18n="wa_soria">WhatsApp Soria</a></div>
+      </div>
+      <div class="contact-card contact-benidorm" role="region" aria-label="Contacto Benidorm">
+        <h3>🌊 <span data-i18n="nav_benidorm">Benidorm</span></h3>
+        <p class="location-label" data-i18n="contacto_benidorm_label">Alicante, Valencia</p>
+        <div class="contact-item"><span class="contact-icon" aria-hidden="true">📞</span><a href="tel:+34600000002" aria-label="Llamar a Laura">+34 600 000 002</a></div>
+        <div class="contact-item"><span class="contact-icon" aria-hidden="true">✉️</span><a href="mailto:benidorm@alquileres.es">benidorm@alquileres.es</a></div>
+        <div class="contact-item"><span class="contact-icon" aria-hidden="true">💬</span><a href="https://wa.me/34600000002" target="_blank" rel="noopener" data-i18n="wa_benidorm">WhatsApp Benidorm</a></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer role="contentinfo"><p data-i18n="footer">© 2025 Alquileres · Todos los derechos reservados</p></footer>
+
+<script>
+const LANGS={
+  es:{nav_ubicaciones:"Ubicaciones",nav_ontalvilla:"Ontalvilla de Almazán",nav_benidorm:"Benidorm",nav_sobre:"Sobre nosotros",badge_soria:"Soria",badge_valencia:"Valencia",guia_benidorm_title:"Guía de Benidorm",guia_benidorm_sub:"Todo lo que necesitas saber para disfrutar al máximo de tu estancia en la Costa Blanca",guia_comer_title:"Dónde comer",guia_ver_title:"Qué ver",guia_rutas_title:"Rutas y senderismo",guia_back:"← Volver a propiedades",sec_contacto_title:"Contacto",sec_contacto_sub:"Escríbenos o llámanos, estaremos encantados de atenderte",contacto_soria_label:"Soria, Castilla y León",contacto_benidorm_label:"Alicante, Valencia",wa_soria:"WhatsApp Soria",wa_benidorm:"WhatsApp Benidorm",float_btn:"Contactar",footer:"© 2025 Alquileres · Todos los derechos reservados"},
+  en:{nav_ubicaciones:"Locations",nav_ontalvilla:"Ontalvilla de Almazán",nav_benidorm:"Benidorm",nav_sobre:"About us",badge_soria:"Soria",badge_valencia:"Valencia",guia_benidorm_title:"Benidorm Guide",guia_benidorm_sub:"Everything you need to make the most of your stay on the Costa Blanca",guia_comer_title:"Where to eat",guia_ver_title:"What to see",guia_rutas_title:"Routes & hiking",guia_back:"← Back to properties",sec_contacto_title:"Contact",sec_contacto_sub:"Write or call us, we'll be happy to help",contacto_soria_label:"Soria, Castilla y León",contacto_benidorm_label:"Alicante, Valencia",wa_soria:"WhatsApp Soria",wa_benidorm:"WhatsApp Benidorm",float_btn:"Contact",footer:"© 2025 Alquileres · All rights reserved"}
+};
+function applyLang(lang){
+  const T=LANGS[lang]||LANGS.es;
+  document.documentElement.lang=lang;
+  document.querySelectorAll('[data-i18n]').forEach(el=>{if(T[el.dataset.i18n]!==undefined)el.textContent=T[el.dataset.i18n];});
+  ['btn-es','mob-es'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.toggle('active',lang==='es');});
+  ['btn-en','mob-en'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.toggle('active',lang==='en');});
+  localStorage.setItem('lang',lang);
+}
+function setLang(l){applyLang(l);}
+function showTab(id,e){
+  document.querySelectorAll('.guide-section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
+  document.getElementById('tab-'+id).classList.add('active');
+  if(e&&e.target)e.target.classList.add('active');
+}
+function toggleDropdown(e){
+  e.stopPropagation();
+  const btn=document.getElementById('dd-btn'),menu=document.getElementById('dd-menu');
+  const open=menu.classList.toggle('open');btn.classList.toggle('open',open);btn.setAttribute('aria-expanded',open);
+}
+document.addEventListener('click',()=>{document.getElementById('dd-btn').classList.remove('open');document.getElementById('dd-menu').classList.remove('open');document.getElementById('dd-btn').setAttribute('aria-expanded','false');});
+function openMobile(){document.getElementById('mobile-menu').classList.add('open');document.body.style.overflow='hidden';}
+function closeMobile(){document.getElementById('mobile-menu').classList.remove('open');document.body.style.overflow='';}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMobile();});
+applyLang(localStorage.getItem('lang')||'es');
+</script>
+</body>
+</html>

@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sobre nosotros · Alquileres</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{--soria:#5c7a4e;--soria-light:#eaf2e5;--soria-dark:#3a4f30;--benidorm:#2a7ab8;--benidorm-light:#e5f1fb;--benidorm-dark:#1a4f78;--dark:#1a1a2e;--text:#333;--light:#f9f9f9}
+  body{font-family:'Segoe UI',sans-serif;color:var(--text);background:var(--light)}
+  a{text-decoration:none;color:inherit}
+
+  nav{position:fixed;top:0;width:100%;z-index:100;background:var(--dark);box-shadow:0 2px 20px rgba(0,0,0,.2);padding:14px 5%}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between}
+  .logo{color:#fff;font-size:1.3rem;font-weight:700}
+  .nav-links{display:flex;gap:1.8rem;align-items:center}
+  .nav-links a{color:#fff;font-size:.95rem;transition:.2s}.nav-links a:hover{color:#aed6a0}
+  .dropdown{position:relative}
+  .dropdown-btn{background:none;border:none;color:#fff;font-size:.95rem;cursor:pointer;display:flex;align-items:center;gap:5px;font-family:inherit;padding:0}.dropdown-btn:hover{color:#aed6a0}
+  .arrow{transition:transform .25s}.dropdown-btn.open .arrow{transform:rotate(180deg)}
+  .dropdown-menu{display:none;position:absolute;top:140%;left:0;background:#fff;border-radius:10px;box-shadow:0 8px 25px rgba(0,0,0,.15);overflow:hidden;min-width:220px}
+  .dropdown-menu.open{display:block}
+  .dropdown-menu a{display:flex;align-items:center;justify-content:space-between;padding:13px 18px;font-size:.9rem;color:var(--text);transition:.2s;border-bottom:1px solid #f0f0f0}
+  .dropdown-menu a:last-child{border:none}.dropdown-menu a:hover{background:var(--light)}
+  .dd-badge{font-size:.7rem;padding:2px 8px;border-radius:10px;font-weight:600}
+  .dd-soria{background:var(--soria-light);color:var(--soria-dark)}.dd-benidorm{background:var(--benidorm-light);color:var(--benidorm-dark)}
+  .lang-switcher{display:flex;gap:.5rem;align-items:center}
+  .lang-btn{background:none;border:2px solid transparent;border-radius:6px;padding:3px 5px;cursor:pointer;opacity:.55;transition:.2s;display:flex;align-items:center;line-height:0}
+  .lang-btn:hover{opacity:1}.lang-btn.active{border-color:rgba(255,255,255,.7);opacity:1}
+  .lang-btn svg{width:26px;height:18px;border-radius:3px}
+  .hamburger{display:none;background:none;border:none;cursor:pointer;padding:4px;flex-direction:column;gap:5px}
+  .hamburger span{display:block;width:24px;height:2px;background:#fff;border-radius:2px}
+  .mobile-menu{display:none;position:fixed;top:0;left:0;width:100%;height:100vh;background:var(--dark);z-index:99;flex-direction:column;align-items:center;justify-content:center;gap:2rem}
+  .mobile-menu.open{display:flex}
+  .mobile-menu a{color:#fff;font-size:1.3rem}
+  .mobile-lang{display:flex;gap:1.2rem;margin-top:1rem;align-items:center}
+  .mobile-lang .lang-btn{padding:5px 7px}.mobile-lang .lang-btn svg{width:36px;height:24px}
+  .close-mobile{position:absolute;top:20px;right:5%;font-size:2rem;color:#fff;background:none;border:none;cursor:pointer}
+
+  .page-hero{padding:120px 5% 70px;text-align:center;background:linear-gradient(135deg,var(--dark) 0%,#2d2d4e 100%);color:#fff}
+  .page-hero h1{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;margin-bottom:.8rem}
+  .page-hero p{opacity:.8;max-width:560px;margin:0 auto;font-size:1.1rem;line-height:1.6}
+
+  .intro-section{padding:70px 5%;text-align:center;max-width:800px;margin:0 auto}
+  .intro-section p{font-size:1.05rem;color:#555;line-height:1.8}
+
+  .owners-section{padding:0 5% 80px;max-width:900px;margin:0 auto}
+  .owners-section h2{text-align:center;font-size:1.6rem;margin-bottom:2rem}
+  .owner-card{display:grid;grid-template-columns:220px 1fr;gap:2.5rem;background:#fff;border-radius:20px;box-shadow:0 4px 24px rgba(0,0,0,.09);overflow:hidden;margin-bottom:2.5rem;transition:.3s}
+  .owner-card:hover{box-shadow:0 10px 35px rgba(0,0,0,.14);transform:translateY(-3px)}
+  .owner-card.reverse{grid-template-columns:1fr 220px}
+  .owner-visual{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:2.5rem 1.5rem;gap:1rem}
+  .soria-visual{background:linear-gradient(160deg,var(--soria-light),#d0e8c8)}
+  .benidorm-visual{background:linear-gradient(160deg,var(--benidorm-light),#c8dff5)}
+  .owner-avatar{width:100px;height:100px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:2.5rem;font-weight:800;color:#fff}
+  .av1{background:var(--soria)}.av2{background:var(--benidorm)}
+  .owner-visual h2{font-size:1.15rem;font-weight:700;color:var(--text);text-align:center}
+  .owner-visual .role{font-size:.82rem;font-weight:600;padding:3px 12px;border-radius:20px;text-align:center}
+  .role-soria{background:var(--soria-light);color:var(--soria-dark)}
+  .role-benidorm{background:var(--benidorm-light);color:var(--benidorm-dark)}
+  .owner-body{padding:2.5rem 2.5rem 2.5rem 0;display:flex;flex-direction:column;justify-content:center}
+  .owner-card.reverse .owner-body{padding:2.5rem 0 2.5rem 2.5rem}
+  .owner-body p{font-size:.95rem;color:#555;line-height:1.8;margin-bottom:1rem}
+  .owner-body p:last-child{margin:0}
+  .owner-detail{display:flex;align-items:center;gap:.6rem;font-size:.88rem;color:#777;margin-top:.8rem}
+
+  .values-section{background:var(--dark);padding:70px 5%;text-align:center}
+  .values-section h2{color:#fff;font-size:1.8rem;font-weight:700;margin-bottom:.5rem}
+  .values-section>p{color:rgba(255,255,255,.6);margin-bottom:3rem;max-width:500px;margin-left:auto;margin-right:auto}
+  .values-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1.5rem;max-width:860px;margin:0 auto}
+  .value-card{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.1);border-radius:14px;padding:1.8rem 1.2rem;text-align:center}
+  .value-icon{font-size:2.2rem;margin-bottom:.8rem}
+  .value-card h3{color:#fff;font-size:1rem;font-weight:700;margin-bottom:.4rem}
+  .value-card p{color:rgba(255,255,255,.55);font-size:.85rem;line-height:1.6}
+
+  .cta-section{padding:70px 5%;text-align:center;background:var(--light)}
+  .cta-section h2{font-size:1.8rem;font-weight:700;margin-bottom:.6rem}
+  .cta-section p{color:#666;margin-bottom:2rem;max-width:480px;margin-left:auto;margin-right:auto}
+  .cta-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+
+  /* CONTACT — mismo estilo que otras páginas */
+  #contacto{background:#fff;padding:70px 5%}
+  .section-title{text-align:center;margin-bottom:50px}
+  .section-title h2{font-size:2rem;font-weight:700;margin-bottom:.5rem}
+  .section-title p{color:#666;max-width:550px;margin:0 auto}
+  .contact-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;max-width:900px;margin:0 auto}
+  .contact-card{border-radius:16px;padding:2rem;text-align:center}
+  .contact-soria{background:var(--soria-light);border:2px solid var(--soria)}
+  .contact-benidorm{background:var(--benidorm-light);border:2px solid var(--benidorm)}
+  .contact-card h3{font-size:1.2rem;font-weight:700;margin-bottom:.3rem}
+  .location-label{font-size:.85rem;color:#666;margin-bottom:1.2rem}
+  .contact-item{display:flex;align-items:center;gap:.8rem;padding:.7rem;background:#fff;border-radius:10px;margin-bottom:.7rem;text-align:left}
+  .contact-icon{font-size:1.3rem;width:32px;text-align:center}
+  .contact-item a{font-size:.9rem;color:var(--text);font-weight:500}.contact-item a:hover{text-decoration:underline}
+
+  footer{background:var(--dark);color:rgba(255,255,255,.5);text-align:center;padding:1.5rem;font-size:.85rem}
+  .float-btn{position:fixed;bottom:28px;right:28px;z-index:200;background:var(--dark);color:#fff;border:none;border-radius:50px;padding:14px 24px;font-size:.95rem;font-weight:700;cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,.3);transition:.3s}.float-btn:hover{background:#0d0d1a;transform:translateY(-2px)}
+
+  .btn{display:inline-block;padding:13px 28px;border-radius:50px;font-size:1rem;font-weight:600;cursor:pointer;border:none;transition:.25s}
+  .btn-soria{background:var(--soria);color:#fff}.btn-soria:hover{background:var(--soria-dark)}
+  .btn-benidorm{background:var(--benidorm);color:#fff}.btn-benidorm:hover{background:var(--benidorm-dark)}
+
+  @media(max-width:768px){
+    .nav-links{display:none}.hamburger{display:flex}
+    .owner-card,.owner-card.reverse{grid-template-columns:1fr}
+    .owner-body,.owner-card.reverse .owner-body{padding:0 1.5rem 1.5rem}
+    .owner-visual{padding:2rem 1.5rem 1rem}
+    .values-grid{grid-template-columns:1fr}
+    .contact-grid{grid-template-columns:1fr}
+    .float-btn{bottom:16px;right:16px;padding:12px 18px;font-size:.85rem}
+  }
+</style>
+</head>
+<body>
+
+<button class="float-btn" onclick="document.getElementById('contacto').scrollIntoView({behavior:'smooth'})" aria-label="Ir a la sección de contacto">📞 <span data-i18n="float_btn">Contactar</span></button>
+
+<nav role="navigation" aria-label="Menú principal">
+  <div class="nav-inner">
+    <a href="index.html" class="logo" aria-label="Volver a la página principal">🏡 Alquileres</a>
+    <div class="nav-links">
+      <div class="dropdown">
+        <button class="dropdown-btn" id="dd-btn" onclick="toggleDropdown(event)" aria-haspopup="true" aria-expanded="false" aria-controls="dd-menu">
+          <span data-i18n="nav_ubicaciones">Ubicaciones</span> <span class="arrow" aria-hidden="true">▾</span>
+        </button>
+        <div class="dropdown-menu" id="dd-menu" role="menu">
+          <a href="ontalvilla-de-almazan.html" role="menuitem">🌿 <span data-i18n="nav_ontalvilla">Ontalvilla de Almazán</span> <span class="dd-badge dd-soria" data-i18n="badge_soria">Soria</span></a>
+          <a href="benidorm.html" role="menuitem">🌊 <span data-i18n="nav_benidorm">Benidorm</span> <span class="dd-badge dd-benidorm" data-i18n="badge_valencia">Valencia</span></a>
+        </div>
+      </div>
+      <a href="sobre-nosotros.html" data-i18n="nav_sobre" aria-current="page">Sobre nosotros</a>
+      <div class="lang-switcher" role="group" aria-label="Seleccionar idioma">
+        <button class="lang-btn active" id="btn-es" onclick="setLang('es')" aria-label="Cambiar idioma a Español" title="Español">
+          <svg viewBox="0 0 60 40" aria-hidden="true"><rect width="60" height="40" fill="#c60b1e"/><rect y="10" width="60" height="20" fill="#ffc400"/></svg>
+        </button>
+        <button class="lang-btn" id="btn-en" onclick="setLang('en')" aria-label="Change language to English" title="English">
+          <svg viewBox="0 0 60 40" aria-hidden="true"><rect width="60" height="40" fill="#012169"/><path d="M0,0 L60,40 M60,0 L0,40" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,40 M60,0 L0,40" stroke="#C8102E" stroke-width="4"/><path d="M30,0 V40 M0,20 H60" stroke="#fff" stroke-width="10"/><path d="M30,0 V40 M0,20 H60" stroke="#C8102E" stroke-width="6"/></svg>
+        </button>
+      </div>
+    </div>
+    <button class="hamburger" onclick="openMobile()" aria-label="Abrir menú" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true" aria-label="Menú móvil">
+  <button class="close-mobile" onclick="closeMobile()" aria-label="Cerrar menú">✕</button>
+  <a href="ontalvilla-de-almazan.html">🌿 <span data-i18n="nav_ontalvilla">Ontalvilla de Almazán</span></a>
+  <a href="benidorm.html">🌊 <span data-i18n="nav_benidorm">Benidorm</span></a>
+  <a href="sobre-nosotros.html" data-i18n="nav_sobre">Sobre nosotros</a>
+  <div class="mobile-lang">
+    <button class="lang-btn active" id="mob-es" onclick="setLang('es');closeMobile()" aria-label="Cambiar a Español" title="Español">
+      <svg viewBox="0 0 60 40" aria-hidden="true"><rect width="60" height="40" fill="#c60b1e"/><rect y="10" width="60" height="20" fill="#ffc400"/></svg>
+    </button>
+    <button class="lang-btn" id="mob-en" onclick="setLang('en');closeMobile()" aria-label="Switch to English" title="English">
+      <svg viewBox="0 0 60 40" aria-hidden="true"><rect width="60" height="40" fill="#012169"/><path d="M0,0 L60,40 M60,0 L0,40" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,40 M60,0 L0,40" stroke="#C8102E" stroke-width="4"/><path d="M30,0 V40 M0,20 H60" stroke="#fff" stroke-width="10"/><path d="M30,0 V40 M0,20 H60" stroke="#C8102E" stroke-width="6"/></svg>
+    </button>
+  </div>
+</div>
+
+<main>
+  <header class="page-hero">
+    <h1 data-i18n="sobre_page_title">Sobre nosotros</h1>
+    <p data-i18n="sobre_page_sub">Dos personas, dos destinos, una misma pasión.</p>
+  </header>
+
+  <div class="intro-section">
+    <p data-i18n="sobre_intro">Somos Miguel y Laura, dos propietarios independientes que comparten la misma filosofía.</p>
+  </div>
+
+  <section class="owners-section" aria-labelledby="propietarios-title">
+    <h2 id="propietarios-title" data-i18n="propietarios_title">Nuestros propietarios</h2>
+    <article class="owner-card" aria-label="Miguel García">
+      <div class="owner-visual soria-visual">
+        <div class="owner-avatar av1" role="img" aria-label="Inicial M de Miguel">M</div>
+        <h2>Miguel García</h2>
+        <span class="role role-soria" data-i18n="sobre_miguel_role">Propietario · Soria</span>
+      </div>
+      <div class="owner-body">
+        <p data-i18n="miguel_p1">Nacido y criado en Soria, llevo toda la vida enamorado de sus llanuras.</p>
+        <p data-i18n="miguel_p2">Me encanta recibir a las familias y ver cómo la gente se sorprende del cielo estrellado.</p>
+        <div class="owner-detail"><span aria-hidden="true">📍</span><span>Ontalvilla de Almazán, Soria</span></div>
+        <div class="owner-detail"><span aria-hidden="true">💬</span><a href="https://wa.me/34600000001" target="_blank" rel="noopener" aria-label="WhatsApp Miguel">WhatsApp: +34 600 000 001</a></div>
+      </div>
+    </article>
+    <article class="owner-card reverse" aria-label="Laura Martínez">
+      <div class="owner-body">
+        <p data-i18n="laura_p1">Llegué a Benidorm hace más de veinte años y nunca me fui.</p>
+        <p data-i18n="laura_p2">Me apasiona ayudar a los viajeros a descubrir el Benidorm auténtico.</p>
+        <div class="owner-detail"><span aria-hidden="true">📍</span><span>Benidorm, Alicante</span></div>
+        <div class="owner-detail"><span aria-hidden="true">💬</span><a href="https://wa.me/34600000002" target="_blank" rel="noopener" aria-label="WhatsApp Laura">WhatsApp: +34 600 000 002</a></div>
+      </div>
+      <div class="owner-visual benidorm-visual">
+        <div class="owner-avatar av2" role="img" aria-label="Inicial L de Laura">L</div>
+        <h2>Laura Martínez</h2>
+        <span class="role role-benidorm" data-i18n="sobre_laura_role">Propietaria · Benidorm</span>
+      </div>
+    </article>
+  </section>
+
+  <section class="values-section" aria-labelledby="valores-title">
+    <h2 id="valores-title" data-i18n="valores_title">Lo que nos define</h2>
+    <p data-i18n="valores_sub">Más allá del alojamiento, ofrecemos una experiencia</p>
+    <div class="values-grid">
+      <div class="value-card"><div class="value-icon" aria-hidden="true">🤝</div><h3 data-i18n="val1_title">Trato cercano</h3><p data-i18n="val1_desc">Somos personas reales. Respondemos rápido.</p></div>
+      <div class="value-card"><div class="value-icon" aria-hidden="true">🏠</div><h3 data-i18n="val2_title">Espacios cuidados</h3><p data-i18n="val2_desc">Lo que ves en las fotos es exactamente lo que encuentras.</p></div>
+      <div class="value-card"><div class="value-icon" aria-hidden="true">📍</div><h3 data-i18n="val3_title">Conocimiento local</h3><p data-i18n="val3_desc">Vivimos aquí. Conocemos cada rincón.</p></div>
+    </div>
+  </section>
+
+  <section class="cta-section">
+    <h2 data-i18n="cta_title">¿Listo para reservar?</h2>
+    <p data-i18n="cta_sub">Elige tu destino y empieza a planificar tu escapada perfecta</p>
+    <div class="cta-btns">
+      <a href="ontalvilla-de-almazan.html" class="btn btn-soria" aria-label="Ver alojamientos en Ontalvilla">🌿 <span data-i18n="nav_ontalvilla">Ontalvilla de Almazán</span></a>
+      <a href="benidorm.html" class="btn btn-benidorm" aria-label="Ver alojamientos en Benidorm">🌊 <span data-i18n="nav_benidorm">Benidorm</span></a>
+    </div>
+  </section>
+
+  <section id="contacto" aria-labelledby="contacto-title">
+    <div class="section-title">
+      <h2 id="contacto-title" data-i18n="sec_contacto_title">Contacto</h2>
+      <p data-i18n="sec_contacto_sub">Escríbenos o llámanos, estaremos encantados de atenderte</p>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-card contact-soria" role="region" aria-label="Contacto Ontalvilla de Almazán">
+        <h3>🌿 <span data-i18n="nav_ontalvilla">Ontalvilla de Almazán</span></h3>
+        <p class="location-label" data-i18n="contacto_soria_label">Soria, Castilla y León</p>
+        <div class="contact-item"><span class="contact-icon" aria-hidden="true">📞</span><a href="tel:+34600000001" aria-label="Llamar a Miguel">+34 600 000 001</a></div>
+        <div class="contact-item"><span class="contact-icon" aria-hidden="true">✉️</span><a href="mailto:soria@alquileres.es" aria-label="Email Soria">soria@alquileres.es</a></div>
+        <div class="contact-item"><span class="contact-icon" aria-hidden="true">💬</span><a href="https://wa.me/34600000001" target="_blank" rel="noopener" data-i18n="wa_soria" aria-label="WhatsApp Soria">WhatsApp Soria</a></div>
+      </div>
+      <div class="contact-card contact-benidorm" role="region" aria-label="Contacto Benidorm">
+        <h3>🌊 <span data-i18n="nav_benidorm">Benidorm</span></h3>
+        <p class="location-label" data-i18n="contacto_benidorm_label">Alicante, Valencia</p>
+        <div class="contact-item"><span class="contact-icon" aria-hidden="true">📞</span><a href="tel:+34600000002" aria-label="Llamar a Laura">+34 600 000 002</a></div>
+        <div class="contact-item"><span class="contact-icon" aria-hidden="true">✉️</span><a href="mailto:benidorm@alquileres.es" aria-label="Email Benidorm">benidorm@alquileres.es</a></div>
+        <div class="contact-item"><span class="contact-icon" aria-hidden="true">💬</span><a href="https://wa.me/34600000002" target="_blank" rel="noopener" data-i18n="wa_benidorm" aria-label="WhatsApp Benidorm">WhatsApp Benidorm</a></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer role="contentinfo"><p data-i18n="footer">© 2025 Alquileres · Todos los derechos reservados</p></footer>
+
+<script>
+const LANGS={
+  es:{nav_ubicaciones:"Ubicaciones",nav_ontalvilla:"Ontalvilla de Almazán",nav_benidorm:"Benidorm",nav_sobre:"Sobre nosotros",badge_soria:"Soria",badge_valencia:"Valencia",sobre_page_title:"Sobre nosotros",sobre_page_sub:"Dos personas, dos destinos, una misma pasión por hacer que te sientas como en casa estés donde estés.",sobre_intro:"Somos Miguel y Laura, dos propietarios independientes que comparten la misma filosofía: ofrecer alojamientos auténticos, cuidados al detalle y con el calor de quien realmente ama el lugar donde vive.",propietarios_title:"Nuestros propietarios",sobre_miguel_role:"Propietario · Soria",sobre_laura_role:"Propietaria · Benidorm",miguel_p1:"Nacido y criado en Soria, llevo toda la vida enamorado de sus llanuras infinitas, sus robledales y la paz que solo se encuentra lejos del ruido de la ciudad. Heredé la casa familiar en Ontalvilla de Almazán y decidí compartirla con viajeros que buscan desconectar de verdad.",miguel_p2:"Me encanta recibir a las familias y ver cómo la gente se sorprende del cielo estrellado por las noches. Si tienes alguna pregunta sobre la zona, los senderos o los mejores restaurantes, no dudes en escribirme.",laura_p1:"Llegué a Benidorm hace más de veinte años y nunca me fui. El Mediterráneo te atrapa. Tengo varios apartamentos a pocos metros de la playa que cuido como si fueran mi propio hogar.",laura_p2:"Me apasiona ayudar a los viajeros a descubrir el Benidorm auténtico: las calas escondidas, el mercado local, los chiringuitos donde comen los de aquí.",valores_title:"Lo que nos define",valores_sub:"Más allá del alojamiento, ofrecemos una experiencia",val1_title:"Trato cercano",val1_desc:"Somos personas reales. Respondemos rápido y resolvemos cualquier duda antes y durante tu estancia.",val2_title:"Espacios cuidados",val2_desc:"Cada propiedad está mantenida con detalle. Lo que ves en las fotos es exactamente lo que encuentras.",val3_title:"Conocimiento local",val3_desc:"Vivimos aquí. Conocemos cada rincón y nos encanta compartir los mejores secretos de la zona.",cta_title:"¿Listo para reservar?",cta_sub:"Elige tu destino y empieza a planificar tu escapada perfecta",sec_contacto_title:"Contacto",sec_contacto_sub:"Escríbenos o llámanos, estaremos encantados de atenderte",contacto_soria_label:"Soria, Castilla y León",contacto_benidorm_label:"Alicante, Valencia",wa_soria:"WhatsApp Soria",wa_benidorm:"WhatsApp Benidorm",float_btn:"Contactar",footer:"© 2025 Alquileres · Todos los derechos reservados"},
+  en:{nav_ubicaciones:"Locations",nav_ontalvilla:"Ontalvilla de Almazán",nav_benidorm:"Benidorm",nav_sobre:"About us",badge_soria:"Soria",badge_valencia:"Valencia",sobre_page_title:"About us",sobre_page_sub:"Two people, two destinations, one shared passion for making you feel at home wherever you are.",sobre_intro:"We are Miguel and Laura, two independent owners who share the same philosophy: offering authentic, carefully maintained accommodation with the warmth of someone who truly loves where they live.",propietarios_title:"Our owners",sobre_miguel_role:"Owner · Soria",sobre_laura_role:"Owner · Benidorm",miguel_p1:"Born and raised in Soria, I have spent my whole life in love with its endless plains, oak forests and the peace you can only find far from city noise. I inherited the family home in Ontalvilla de Almazán and decided to share it with travellers looking to truly disconnect.",miguel_p2:"I love welcoming families and watching guests marvel at the starry sky at night. If you have any questions about the area, hiking trails or the best local restaurants, don't hesitate to get in touch.",laura_p1:"I arrived in Benidorm over twenty years ago and never left. The Mediterranean gets into your soul. I have several apartments a few steps from the beach that I look after as if they were my own home.",laura_p2:"I love helping travellers discover the authentic Benidorm: hidden coves, the local market, the beach bars where the locals eat.",valores_title:"What defines us",valores_sub:"Beyond accommodation, we offer an experience",val1_title:"Personal touch",val1_desc:"We are real people. We respond quickly and solve any question before and during your stay.",val2_title:"Well-kept spaces",val2_desc:"Every property is maintained in detail. What you see in the photos is exactly what you find.",val3_title:"Local knowledge",val3_desc:"We live here. We know every corner and love sharing the best-kept secrets of the area.",cta_title:"Ready to book?",cta_sub:"Choose your destination and start planning your perfect getaway",sec_contacto_title:"Contact",sec_contacto_sub:"Write or call us, we'll be happy to help",contacto_soria_label:"Soria, Castilla y León",contacto_benidorm_label:"Alicante, Valencia",wa_soria:"WhatsApp Soria",wa_benidorm:"WhatsApp Benidorm",float_btn:"Contact",footer:"© 2025 Alquileres · All rights reserved"}
+};
+function applyLang(lang){
+  const T=LANGS[lang]||LANGS.es;
+  document.documentElement.lang=lang;
+  document.querySelectorAll('[data-i18n]').forEach(el=>{if(T[el.dataset.i18n]!==undefined)el.textContent=T[el.dataset.i18n];});
+  ['btn-es','mob-es'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.toggle('active',lang==='es');});
+  ['btn-en','mob-en'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.toggle('active',lang==='en');});
+  localStorage.setItem('lang',lang);
+}
+function setLang(l){applyLang(l);}
+function toggleDropdown(e){
+  e.stopPropagation();
+  const btn=document.getElementById('dd-btn'),menu=document.getElementById('dd-menu');
+  const open=menu.classList.toggle('open');btn.classList.toggle('open',open);btn.setAttribute('aria-expanded',open);
+}
+document.addEventListener('click',()=>{
+  document.getElementById('dd-btn').classList.remove('open');
+  document.getElementById('dd-menu').classList.remove('open');
+  document.getElementById('dd-btn').setAttribute('aria-expanded','false');
+});
+function openMobile(){document.getElementById('mobile-menu').classList.add('open');document.body.style.overflow='hidden';}
+function closeMobile(){document.getElementById('mobile-menu').classList.remove('open');document.body.style.overflow='';}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMobile();});
+applyLang(localStorage.getItem('lang')||'es');
+</script>
+</body>
+</html>

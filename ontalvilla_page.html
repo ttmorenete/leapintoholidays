@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ontalvilla de Almazán · Alquileres</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box}
+  :root{--soria:#5c7a4e;--soria-light:#eaf2e5;--soria-dark:#3a4f30;--benidorm:#2a7ab8;--benidorm-light:#e5f1fb;--benidorm-dark:#1a4f78;--dark:#1a1a2e;--text:#333;--light:#f9f9f9}
+  body{font-family:'Segoe UI',sans-serif;color:var(--text);background:var(--light)}
+  a{text-decoration:none;color:inherit}
+
+  nav{position:fixed;top:0;width:100%;z-index:100;background:var(--soria-dark);box-shadow:0 2px 20px rgba(0,0,0,.2);padding:14px 5%}
+  .nav-inner{display:flex;align-items:center;justify-content:space-between}
+  .logo{color:#fff;font-size:1.3rem;font-weight:700}
+  .nav-links{display:flex;gap:1.8rem;align-items:center}
+  .nav-links a{color:#fff;font-size:.95rem;transition:.2s}.nav-links a:hover{color:#aed6a0}
+  .dropdown{position:relative}
+  .dropdown-btn{background:none;border:none;color:#fff;font-size:.95rem;cursor:pointer;display:flex;align-items:center;gap:5px;font-family:inherit;padding:0}.dropdown-btn:hover{color:#aed6a0}
+  .arrow{transition:transform .25s}.dropdown-btn.open .arrow{transform:rotate(180deg)}
+  .dropdown-menu{display:none;position:absolute;top:140%;left:0;background:#fff;border-radius:10px;box-shadow:0 8px 25px rgba(0,0,0,.15);overflow:hidden;min-width:220px}
+  .dropdown-menu.open{display:block}
+  .dropdown-menu a{display:flex;align-items:center;justify-content:space-between;padding:13px 18px;font-size:.9rem;color:var(--text);transition:.2s;border-bottom:1px solid #f0f0f0}
+  .dropdown-menu a:last-child{border:none}.dropdown-menu a:hover{background:var(--light)}
+  .dd-badge{font-size:.7rem;padding:2px 8px;border-radius:10px;font-weight:600}
+  .dd-soria{background:var(--soria-light);color:var(--soria-dark)}.dd-benidorm{background:var(--benidorm-light);color:var(--benidorm-dark)}
+  .lang-switcher{display:flex;gap:.5rem;align-items:center}
+  .lang-btn{background:none;border:2px solid transparent;border-radius:6px;padding:3px 5px;cursor:pointer;opacity:.55;transition:.2s;display:flex;align-items:center;line-height:0}
+  .lang-btn:hover{opacity:1}.lang-btn.active{border-color:rgba(255,255,255,.7);opacity:1}
+  .lang-btn svg{width:26px;height:18px;border-radius:3px}
+  .hamburger{display:none;background:none;border:none;cursor:pointer;padding:4px;flex-direction:column;gap:5px}
+  .hamburger span{display:block;width:24px;height:2px;background:#fff;border-radius:2px}
+  .mobile-menu{display:none;position:fixed;top:0;left:0;width:100%;height:100vh;background:var(--dark);z-index:99;flex-direction:column;align-items:center;justify-content:center;gap:2rem}
+  .mobile-menu.open{display:flex}
+  .mobile-menu a{color:#fff;font-size:1.3rem}
+  .mobile-lang{display:flex;gap:1.2rem;margin-top:1rem;align-items:center}
+  .mobile-lang .lang-btn{padding:5px 7px}.mobile-lang .lang-btn svg{width:36px;height:24px}
+  .close-mobile{position:absolute;top:20px;right:5%;font-size:2rem;color:#fff;background:none;border:none;cursor:pointer}
+
+  .page-hero{padding:110px 5% 60px;text-align:center;background:linear-gradient(135deg,var(--soria-dark),var(--soria));color:#fff}
+  .page-hero h1{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:800;margin-bottom:.6rem}
+  .page-hero p{opacity:.85;max-width:520px;margin:0 auto;font-size:1.05rem}
+
+  /* GRID DE TARJETAS */
+  .props-section{padding:60px 5%}
+  .props-section h2{text-align:center;font-size:1.6rem;font-weight:700;margin-bottom:2rem;color:var(--soria-dark)}
+  .props-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:2rem;max-width:1100px;margin:0 auto}
+
+  .prop-card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.08);transition:.3s;display:block}
+  .prop-card:hover{transform:translateY(-6px);box-shadow:0 12px 32px rgba(0,0,0,.14)}
+  .prop-card-img{height:200px;background:linear-gradient(135deg,var(--soria-light),#c8dfc0);display:flex;align-items:center;justify-content:center;font-size:3.5rem;position:relative;overflow:hidden}
+  .prop-card-img img{width:100%;height:100%;object-fit:cover}
+  .prop-card-body{padding:1.4rem}
+  .prop-card-body h3{font-size:1.1rem;font-weight:700;margin-bottom:.4rem;color:var(--text)}
+  .prop-meta{display:flex;gap:1rem;font-size:.82rem;color:#777;margin-bottom:.6rem;flex-wrap:wrap}
+  .prop-desc-short{font-size:.87rem;color:#555;line-height:1.5;margin-bottom:1rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+  .prop-footer{display:flex;align-items:center;justify-content:space-between;margin-top:.5rem}
+  .prop-price{font-size:1.15rem;font-weight:800;color:var(--soria-dark)}
+  .btn-ver{background:var(--soria);color:#fff;padding:8px 18px;border-radius:50px;font-size:.85rem;font-weight:600;transition:.2s}
+  .btn-ver:hover{background:var(--soria-dark)}
+
+  /* MAP */
+  .map-section{padding:60px 5%;background:#fff}
+  .map-section h2{text-align:center;font-size:1.6rem;font-weight:700;margin-bottom:1.5rem}
+  .map-container{max-width:900px;margin:0 auto;border-radius:16px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.1);height:400px}
+  .map-container iframe{width:100%;height:100%;border:none}
+
+  /* CONTACT */
+  .contact-section{background:var(--soria-light);padding:60px 5%;text-align:center}
+  .contact-section h2{font-size:1.6rem;font-weight:700;margin-bottom:.5rem}
+  .contact-section p{color:#555;margin-bottom:1.8rem;max-width:480px;margin-left:auto;margin-right:auto}
+  .contact-btns{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap}
+  .btn-soria{background:var(--soria);color:#fff;display:inline-block;padding:12px 28px;border-radius:50px;font-size:1rem;font-weight:600;transition:.25s;border:none}.btn-soria:hover{background:var(--soria-dark)}
+  .btn-outline-soria{background:transparent;color:var(--soria-dark);border:2px solid var(--soria);display:inline-block;padding:12px 28px;border-radius:50px;font-size:1rem;font-weight:600;transition:.25s}.btn-outline-soria:hover{background:var(--soria);color:#fff}
+
+  footer{background:var(--dark);color:rgba(255,255,255,.5);text-align:center;padding:1.5rem;font-size:.85rem}
+  .float-btn{position:fixed;bottom:28px;right:28px;z-index:200;background:var(--soria-dark);color:#fff;border:none;border-radius:50px;padding:14px 24px;font-size:.95rem;font-weight:700;cursor:pointer;box-shadow:0 4px 20px rgba(0,0,0,.3);transition:.3s}.float-btn:hover{background:#2c3e22;transform:translateY(-2px)}
+
+  @media(max-width:768px){
+    .nav-links{display:none}.hamburger{display:flex}
+    .props-grid{grid-template-columns:1fr}
+    .map-container{height:280px}
+    .float-btn{bottom:16px;right:16px;padding:12px 18px;font-size:.85rem}
+  }
+</style>
+</head>
+<body>
+
+<button class="float-btn" onclick="document.getElementById('contacto').scrollIntoView({behavior:'smooth'})" aria-label="Ir a contacto">📞 <span data-i18n="float_btn">Contactar</span></button>
+
+<nav role="navigation" aria-label="Menú principal">
+  <div class="nav-inner">
+    <a href="index.html" class="logo" aria-label="Ir a la página principal">🏡 Alquileres</a>
+    <div class="nav-links">
+      <div class="dropdown">
+        <button class="dropdown-btn" id="dd-btn" onclick="toggleDropdown(event)" aria-haspopup="true" aria-expanded="false" aria-controls="dd-menu">
+          <span data-i18n="nav_ubicaciones">Ubicaciones</span> <span class="arrow" aria-hidden="true">▾</span>
+        </button>
+        <div class="dropdown-menu" id="dd-menu" role="menu">
+          <a href="ontalvilla-de-almazan.html" role="menuitem">🌿 <span data-i18n="nav_ontalvilla">Ontalvilla de Almazán</span> <span class="dd-badge dd-soria" data-i18n="badge_soria">Soria</span></a>
+          <a href="benidorm.html" role="menuitem">🌊 <span data-i18n="nav_benidorm">Benidorm</span> <span class="dd-badge dd-benidorm" data-i18n="badge_valencia">Valencia</span></a>
+        </div>
+      </div>
+      <a href="sobre-nosotros.html" data-i18n="nav_sobre">Sobre nosotros</a>
+      <div class="lang-switcher" role="group" aria-label="Seleccionar idioma">
+        <button class="lang-btn active" id="btn-es" onclick="setLang('es')" aria-label="Cambiar idioma a Español" title="Español">
+          <svg viewBox="0 0 60 40" aria-hidden="true"><rect width="60" height="40" fill="#c60b1e"/><rect y="10" width="60" height="20" fill="#ffc400"/></svg>
+        </button>
+        <button class="lang-btn" id="btn-en" onclick="setLang('en')" aria-label="Change language to English" title="English">
+          <svg viewBox="0 0 60 40" aria-hidden="true"><rect width="60" height="40" fill="#012169"/><path d="M0,0 L60,40 M60,0 L0,40" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,40 M60,0 L0,40" stroke="#C8102E" stroke-width="4"/><path d="M30,0 V40 M0,20 H60" stroke="#fff" stroke-width="10"/><path d="M30,0 V40 M0,20 H60" stroke="#C8102E" stroke-width="6"/></svg>
+        </button>
+      </div>
+    </div>
+    <button class="hamburger" onclick="openMobile()" aria-label="Abrir menú" id="hamburger"><span></span><span></span><span></span></button>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true">
+  <button class="close-mobile" onclick="closeMobile()" aria-label="Cerrar menú">✕</button>
+  <a href="ontalvilla-de-almazan.html">🌿 <span data-i18n="nav_ontalvilla">Ontalvilla de Almazán</span></a>
+  <a href="benidorm.html">🌊 <span data-i18n="nav_benidorm">Benidorm</span></a>
+  <a href="sobre-nosotros.html" data-i18n="nav_sobre">Sobre nosotros</a>
+  <div class="mobile-lang">
+    <button class="lang-btn active" id="mob-es" onclick="setLang('es');closeMobile()" aria-label="Cambiar a Español" title="Español">
+      <svg viewBox="0 0 60 40" aria-hidden="true"><rect width="60" height="40" fill="#c60b1e"/><rect y="10" width="60" height="20" fill="#ffc400"/></svg>
+    </button>
+    <button class="lang-btn" id="mob-en" onclick="setLang('en');closeMobile()" aria-label="Switch to English" title="English">
+      <svg viewBox="0 0 60 40" aria-hidden="true"><rect width="60" height="40" fill="#012169"/><path d="M0,0 L60,40 M60,0 L0,40" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,40 M60,0 L0,40" stroke="#C8102E" stroke-width="4"/><path d="M30,0 V40 M0,20 H60" stroke="#fff" stroke-width="10"/><path d="M30,0 V40 M0,20 H60" stroke="#C8102E" stroke-width="6"/></svg>
+    </button>
+  </div>
+</div>
+
+<main>
+  <header class="page-hero">
+    <h1>🌿 <span data-i18n="nav_ontalvilla">Ontalvilla de Almazán</span></h1>
+    <p>Soria · Castilla y León</p>
+  </header>
+
+  <section class="props-section" aria-labelledby="casas-title">
+    <h2 id="casas-title" data-i18n="casas_title">Nuestras casas</h2>
+    <div class="props-grid" id="props-grid"></div>
+  </section>
+
+  <section class="map-section" aria-labelledby="map-title-ont">
+    <h2 id="map-title-ont" data-i18n="map_title_ontalvilla">¿Dónde estamos? · Ontalvilla de Almazán</h2>
+    <div class="map-container">
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3019.1!2d-2.5261!3d41.3192!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd451b0e2f4c4f1b%3A0x0!2sOntalvilla+de+Almaz%C3%A1n%2C+Soria!5e0!3m2!1ses!2ses!4v1"
+        allowfullscreen loading="lazy" referrerpolicy="no-referrer-when-downgrade"
+        title="Mapa de Ontalvilla de Almazán" aria-label="Mapa con la ubicación de Ontalvilla de Almazán">
+      </iframe>
+    </div>
+  </section>
+
+  <section class="contact-section" id="contacto" aria-labelledby="contact-title-ont">
+    <h2 id="contact-title-ont" data-i18n="prop_contact_title">¿Te interesa alguna propiedad?</h2>
+    <p data-i18n="prop_contact_sub_soria">Contacta con Miguel para reservar o resolver cualquier duda.</p>
+    <div class="contact-btns">
+      <a href="tel:+34600000001" class="btn-soria" data-i18n="btn_call">📞 Llamar</a>
+      <a href="https://wa.me/34600000001" target="_blank" rel="noopener" class="btn-soria" data-i18n="btn_whatsapp">💬 WhatsApp</a>
+      <a href="mailto:soria@alquileres.es" class="btn-outline-soria" data-i18n="btn_email">✉️ Email</a>
+    </div>
+  </section>
+</main>
+
+<footer role="contentinfo"><p data-i18n="footer">© 2025 Alquileres · Todos los derechos reservados</p></footer>
+
+<script>
+const LANGS={
+  es:{nav_ubicaciones:"Ubicaciones",nav_ontalvilla:"Ontalvilla de Almazán",nav_benidorm:"Benidorm",nav_sobre:"Sobre nosotros",badge_soria:"Soria",badge_valencia:"Valencia",casas_title:"Nuestras casas",map_title_ontalvilla:"¿Dónde estamos? · Ontalvilla de Almazán",prop_contact_title:"¿Te interesa alguna propiedad?",prop_contact_sub_soria:"Contacta con Miguel para reservar o resolver cualquier duda sobre nuestros alojamientos en Soria.",btn_call:"📞 Llamar",btn_whatsapp:"💬 WhatsApp",btn_email:"✉️ Email",night:"noche",ver_mas:"Ver casa →",float_btn:"Contactar",footer:"© 2025 Alquileres · Todos los derechos reservados",
+    props:[
+      {name:"Casa 1",slug:"casa-ontalvilla-1",beds:4,baths:2,m2:120,price:"120",desc:"Amplia casa de piedra con jardín privado y vistas a la llanura soriana. Chimenea y barbacoa incluidas.",emoji:"🏡"},
+      {name:"Casa 2",slug:"casa-ontalvilla-2",beds:3,baths:1,m2:90,price:"90",desc:"Acogedora casa rural con porche de madera y huerto propio. A pocos metros del río.",emoji:"🛖"},
+      {name:"Casa 3",slug:"casa-ontalvilla-3",beds:5,baths:2,m2:150,price:"140",desc:"La más grande de nuestras casas, ideal para grupos o familias numerosas. Salón con chimenea de leña.",emoji:"🏠"},
+      {name:"Casa 4",slug:"casa-ontalvilla-4",beds:2,baths:1,m2:65,price:"75",desc:"Casa pequeña y encantadora para parejas o estancias íntimas. Rodeada de encinas centenarias.",emoji:"🌿"},
+      {name:"Casa 5",slug:"casa-ontalvilla-5",beds:3,baths:2,m2:100,price:"105",desc:"Casa rehabilitada con materiales tradicionales. Terraza con vistas al campo y parking privado.",emoji:"🌻"},
+      {name:"Casa 6",slug:"casa-ontalvilla-6",beds:4,baths:2,m2:130,price:"115",desc:"Amplio jardín con zona de barbacoa y juegos para niños. Muy cerca del casco antiguo de Almazán.",emoji:"🌲"}
+    ]
+  },
+  en:{nav_ubicaciones:"Locations",nav_ontalvilla:"Ontalvilla de Almazán",nav_benidorm:"Benidorm",nav_sobre:"About us",badge_soria:"Soria",badge_valencia:"Valencia",casas_title:"Our houses",map_title_ontalvilla:"Where are we? · Ontalvilla de Almazán",prop_contact_title:"Interested in a property?",prop_contact_sub_soria:"Contact Miguel to book or resolve any questions about our Soria accommodation.",btn_call:"📞 Call",btn_whatsapp:"💬 WhatsApp",btn_email:"✉️ Email",night:"night",ver_mas:"View house →",float_btn:"Contact",footer:"© 2025 Alquileres · All rights reserved",
+    props:[
+      {name:"House 1",slug:"casa-ontalvilla-1",beds:4,baths:2,m2:120,price:"120",desc:"Spacious stone house with private garden and views over the Soria plain. Fireplace and barbecue included.",emoji:"🏡"},
+      {name:"House 2",slug:"casa-ontalvilla-2",beds:3,baths:1,m2:90,price:"90",desc:"Cosy rural house with wooden porch and vegetable garden. Steps from the river.",emoji:"🛖"},
+      {name:"House 3",slug:"casa-ontalvilla-3",beds:5,baths:2,m2:150,price:"140",desc:"Our largest property, ideal for groups or big families. Living room with log fireplace.",emoji:"🏠"},
+      {name:"House 4",slug:"casa-ontalvilla-4",beds:2,baths:1,m2:65,price:"75",desc:"Small and charming house for couples or intimate stays. Surrounded by ancient oak trees.",emoji:"🌿"},
+      {name:"House 5",slug:"casa-ontalvilla-5",beds:3,baths:2,m2:100,price:"105",desc:"Restored house with traditional materials. Terrace with countryside views and private parking.",emoji:"🌻"},
+      {name:"House 6",slug:"casa-ontalvilla-6",beds:4,baths:2,m2:130,price:"115",desc:"Large garden with barbecue area and children's play area. Very close to the old town of Almazán.",emoji:"🌲"}
+    ]
+  }
+};
+
+let currentLang='es';
+
+function renderGrid(lang){
+  const T=LANGS[lang];
+  document.getElementById('props-grid').innerHTML=T.props.map(p=>`
+    <a href="${p.slug}.html" class="prop-card" aria-label="${p.name}">
+      <div class="prop-card-img" role="img" aria-label="Imagen de ${p.name}">${p.emoji}</div>
+      <div class="prop-card-body">
+        <h3>${p.name}</h3>
+        <div class="prop-meta">
+          <span>🛏 ${p.beds} ${lang==='es'?'hab.':'bed.'}</span>
+          <span>🚿 ${p.baths} ${lang==='es'?'baños':'baths'}</span>
+          <span>📐 ${p.m2} m²</span>
+        </div>
+        <p class="prop-desc-short">${p.desc}</p>
+        <div class="prop-footer">
+          <span class="prop-price">${p.price}€/<span>${T.night}</span></span>
+          <span class="btn-ver">${T.ver_mas}</span>
+        </div>
+      </div>
+    </a>`).join('');
+}
+
+function applyLang(lang){
+  const T=LANGS[lang]||LANGS.es;
+  currentLang=lang;
+  document.documentElement.lang=lang;
+  document.querySelectorAll('[data-i18n]').forEach(el=>{if(T[el.dataset.i18n]!==undefined)el.textContent=T[el.dataset.i18n];});
+  renderGrid(lang);
+  ['btn-es','mob-es'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.toggle('active',lang==='es');});
+  ['btn-en','mob-en'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.toggle('active',lang==='en');});
+  localStorage.setItem('lang',lang);
+}
+function setLang(l){applyLang(l);}
+function toggleDropdown(e){
+  e.stopPropagation();
+  const btn=document.getElementById('dd-btn'),menu=document.getElementById('dd-menu');
+  const open=menu.classList.toggle('open');btn.classList.toggle('open',open);btn.setAttribute('aria-expanded',open);
+}
+document.addEventListener('click',()=>{document.getElementById('dd-btn').classList.remove('open');document.getElementById('dd-menu').classList.remove('open');document.getElementById('dd-btn').setAttribute('aria-expanded','false');});
+function openMobile(){document.getElementById('mobile-menu').classList.add('open');document.body.style.overflow='hidden';}
+function closeMobile(){document.getElementById('mobile-menu').classList.remove('open');document.body.style.overflow='';}
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeMobile();});
+
+applyLang(localStorage.getItem('lang')||'es');
+</script>
+</body>
+</html>
