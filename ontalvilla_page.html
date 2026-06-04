@@ -97,11 +97,11 @@
           <span data-i18n="nav_ubicaciones">Ubicaciones</span> <span class="arrow" aria-hidden="true">▾</span>
         </button>
         <div class="dropdown-menu" id="dd-menu" role="menu">
-          <a href="ontalvilla-de-almazan.html" role="menuitem">🌿 <span data-i18n="nav_ontalvilla">Ontalvilla de Almazán</span> <span class="dd-badge dd-soria" data-i18n="badge_soria">Soria</span></a>
-          <a href="benidorm.html" role="menuitem">🌊 <span data-i18n="nav_benidorm">Benidorm</span> <span class="dd-badge dd-benidorm" data-i18n="badge_valencia">Valencia</span></a>
+          <a href="ontalvilla_page.html" role="menuitem">🌿 <span data-i18n="nav_ontalvilla">Ontalvilla de Almazán</span> <span class="dd-badge dd-soria" data-i18n="badge_soria">Soria</span></a>
+          <a href="benidorm_page.html" role="menuitem">🌊 <span data-i18n="nav_benidorm">Benidorm</span> <span class="dd-badge dd-benidorm" data-i18n="badge_valencia">Valencia</span></a>
         </div>
       </div>
-      <a href="sobre-nosotros.html" data-i18n="nav_sobre">Sobre nosotros</a>
+      <a href="sobre-nosotros_page.html" data-i18n="nav_sobre">Sobre nosotros</a>
       <div class="lang-switcher" role="group" aria-label="Seleccionar idioma">
         <button class="lang-btn active" id="btn-es" onclick="setLang('es')" aria-label="Cambiar idioma a Español" title="Español">
           <svg viewBox="0 0 60 40" aria-hidden="true"><rect width="60" height="40" fill="#c60b1e"/><rect y="10" width="60" height="20" fill="#ffc400"/></svg>
@@ -117,9 +117,9 @@
 
 <div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true">
   <button class="close-mobile" onclick="closeMobile()" aria-label="Cerrar menú">✕</button>
-  <a href="ontalvilla-de-almazan.html">🌿 <span data-i18n="nav_ontalvilla">Ontalvilla de Almazán</span></a>
-  <a href="benidorm.html">🌊 <span data-i18n="nav_benidorm">Benidorm</span></a>
-  <a href="sobre-nosotros.html" data-i18n="nav_sobre">Sobre nosotros</a>
+  <a href="ontalvilla_page.html">🌿 <span data-i18n="nav_ontalvilla">Ontalvilla de Almazán</span></a>
+  <a href="benidorm_page.html">🌊 <span data-i18n="nav_benidorm">Benidorm</span></a>
+  <a href="sobre-nosotros_page.html" data-i18n="nav_sobre">Sobre nosotros</a>
   <div class="mobile-lang">
     <button class="lang-btn active" id="mob-es" onclick="setLang('es');closeMobile()" aria-label="Cambiar a Español" title="Español">
       <svg viewBox="0 0 60 40" aria-hidden="true"><rect width="60" height="40" fill="#c60b1e"/><rect y="10" width="60" height="20" fill="#ffc400"/></svg>
@@ -168,7 +168,7 @@
 const LANGS={
   es:{nav_ubicaciones:"Ubicaciones",nav_ontalvilla:"Ontalvilla de Almazán",nav_benidorm:"Benidorm",nav_sobre:"Sobre nosotros",badge_soria:"Soria",badge_valencia:"Valencia",casas_title:"Nuestras casas",map_title_ontalvilla:"¿Dónde estamos? · Ontalvilla de Almazán",prop_contact_title:"¿Te interesa alguna propiedad?",prop_contact_sub_soria:"Contacta con Miguel para reservar o resolver cualquier duda sobre nuestros alojamientos en Soria.",btn_call:"📞 Llamar",btn_whatsapp:"💬 WhatsApp",btn_email:"✉️ Email",night:"noche",ver_mas:"Ver casa →",float_btn:"Contactar",footer:"© 2025 Alquileres · Todos los derechos reservados",
     props:[
-      {name:"Casa 1",slug:"casa-ontalvilla-1",beds:4,baths:2,m2:120,price:"120",desc:"Amplia casa de piedra con jardín privado y vistas a la llanura soriana. Chimenea y barbacoa incluidas.",emoji:"🏡"},
+      {name:"Casa 1",slug:"casa_individual",beds:4,baths:2,m2:120,price:"120",desc:"Amplia casa de piedra con jardín privado y vistas a la llanura soriana. Chimenea y barbacoa incluidas.",emoji:"🏡"},
       {name:"Casa 2",slug:"casa-ontalvilla-2",beds:3,baths:1,m2:90,price:"90",desc:"Acogedora casa rural con porche de madera y huerto propio. A pocos metros del río.",emoji:"🛖"},
       {name:"Casa 3",slug:"casa-ontalvilla-3",beds:5,baths:2,m2:150,price:"140",desc:"La más grande de nuestras casas, ideal para grupos o familias numerosas. Salón con chimenea de leña.",emoji:"🏠"},
       {name:"Casa 4",slug:"casa-ontalvilla-4",beds:2,baths:1,m2:65,price:"75",desc:"Casa pequeña y encantadora para parejas o estancias íntimas. Rodeada de encinas centenarias.",emoji:"🌿"},
@@ -178,7 +178,7 @@ const LANGS={
   },
   en:{nav_ubicaciones:"Locations",nav_ontalvilla:"Ontalvilla de Almazán",nav_benidorm:"Benidorm",nav_sobre:"About us",badge_soria:"Soria",badge_valencia:"Valencia",casas_title:"Our houses",map_title_ontalvilla:"Where are we? · Ontalvilla de Almazán",prop_contact_title:"Interested in a property?",prop_contact_sub_soria:"Contact Miguel to book or resolve any questions about our Soria accommodation.",btn_call:"📞 Call",btn_whatsapp:"💬 WhatsApp",btn_email:"✉️ Email",night:"night",ver_mas:"View house →",float_btn:"Contact",footer:"© 2025 Alquileres · All rights reserved",
     props:[
-      {name:"House 1",slug:"casa-ontalvilla-1",beds:4,baths:2,m2:120,price:"120",desc:"Spacious stone house with private garden and views over the Soria plain. Fireplace and barbecue included.",emoji:"🏡"},
+      {name:"House 1",slug:"casa_individual",beds:4,baths:2,m2:120,price:"120",desc:"Spacious stone house with private garden and views over the Soria plain. Fireplace and barbecue included.",emoji:"🏡"},
       {name:"House 2",slug:"casa-ontalvilla-2",beds:3,baths:1,m2:90,price:"90",desc:"Cosy rural house with wooden porch and vegetable garden. Steps from the river.",emoji:"🛖"},
       {name:"House 3",slug:"casa-ontalvilla-3",beds:5,baths:2,m2:150,price:"140",desc:"Our largest property, ideal for groups or big families. Living room with log fireplace.",emoji:"🏠"},
       {name:"House 4",slug:"casa-ontalvilla-4",beds:2,baths:1,m2:65,price:"75",desc:"Small and charming house for couples or intimate stays. Surrounded by ancient oak trees.",emoji:"🌿"},
