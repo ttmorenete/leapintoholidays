@@ -86,11 +86,11 @@
           <span data-i18n="nav_ubicaciones">Ubicaciones</span> <span class="arrow" aria-hidden="true">▾</span>
         </button>
         <div class="dropdown-menu" id="dd-menu" role="menu">
-          <a href="ontalvilla-de-almazan.html" role="menuitem">🌿 <span data-i18n="nav_ontalvilla">Ontalvilla de Almazán</span> <span class="dd-badge dd-soria">Soria</span></a>
-          <a href="benidorm.html" role="menuitem">🌊 <span data-i18n="nav_benidorm">Benidorm</span> <span class="dd-badge dd-benidorm">Valencia</span></a>
+          <a href="ontalvilla_page.html" role="menuitem">🌿 <span data-i18n="nav_ontalvilla">Ontalvilla de Almazán</span> <span class="dd-badge dd-soria">Soria</span></a>
+          <a href="benidorm_page.html" role="menuitem">🌊 <span data-i18n="nav_benidorm">Benidorm</span> <span class="dd-badge dd-benidorm">Valencia</span></a>
         </div>
       </div>
-      <a href="sobre-nosotros.html" data-i18n="nav_sobre">Sobre nosotros</a>
+      <a href="sobre-nosotros_page.html" data-i18n="nav_sobre">Sobre nosotros</a>
       <div class="lang-switcher" role="group" aria-label="Seleccionar idioma">
         <button class="lang-btn active" id="btn-es" onclick="setLang('es')" aria-label="Cambiar idioma a Español" title="Español">
           <svg viewBox="0 0 60 40" aria-hidden="true"><rect width="60" height="40" fill="#c60b1e"/><rect y="10" width="60" height="20" fill="#ffc400"/></svg>
@@ -106,9 +106,9 @@
 
 <div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true">
   <button class="close-mobile" onclick="closeMobile()" aria-label="Cerrar menú">✕</button>
-  <a href="ontalvilla-de-almazan.html">🌿 <span data-i18n="nav_ontalvilla">Ontalvilla de Almazán</span></a>
-  <a href="benidorm.html">🌊 <span data-i18n="nav_benidorm">Benidorm</span></a>
-  <a href="sobre-nosotros.html" data-i18n="nav_sobre">Sobre nosotros</a>
+  <a href="ontalvilla_page.html">🌿 <span data-i18n="nav_ontalvilla">Ontalvilla de Almazán</span></a>
+  <a href="benidorm_page.html">🌊 <span data-i18n="nav_benidorm">Benidorm</span></a>
+  <a href="sobre-nosotros_page.html" data-i18n="nav_sobre">Sobre nosotros</a>
   <div class="mobile-lang">
     <button class="lang-btn active" id="mob-es" onclick="setLang('es');closeMobile()" aria-label="Cambiar a Español" title="Español">
       <svg viewBox="0 0 60 40" aria-hidden="true"><rect width="60" height="40" fill="#c60b1e"/><rect y="10" width="60" height="20" fill="#ffc400"/></svg>
@@ -154,16 +154,16 @@
 const LANGS={
   es:{nav_ubicaciones:"Ubicaciones",nav_ontalvilla:"Ontalvilla de Almazán",nav_benidorm:"Benidorm",nav_sobre:"Sobre nosotros",pisos_title:"Nuestros pisos",map_title_benidorm:"¿Dónde estamos? · Benidorm",prop_contact_title:"¿Te interesa algún piso?",prop_contact_sub_benidorm:"Contacta con Laura para reservar o resolver cualquier duda sobre nuestros pisos en Benidorm.",btn_call:"📞 Llamar",btn_whatsapp:"💬 WhatsApp",btn_email:"✉️ Email",night:"noche",ver_mas:"Ver piso →",float_btn:"Contactar",footer:"© 2025 Alquileres · Todos los derechos reservados",
     props:[
-      {name:"Piso 1",slug:"piso-benidorm-1",beds:3,baths:2,m2:85,price:"140",desc:"Moderno piso a 50 m de la playa de Levante, con terraza y vistas al mar. Totalmente equipado.",emoji:"🌊"},
-      {name:"Piso 2",slug:"piso-benidorm-2",beds:2,baths:1,m2:60,price:"90",desc:"Céntrico y luminoso, a pasos de los mejores restaurantes y el paseo marítimo de Benidorm.",emoji:"🏙️"},
-      {name:"Piso 3",slug:"piso-benidorm-3",beds:1,baths:1,m2:40,price:"65",desc:"Acogedor estudio con vistas despejadas al Mediterráneo. Perfecto para escapadas en pareja.",emoji:"🌅"}
+      {name:"Piso 1",slug:"piso_individual-1",beds:3,baths:2,m2:85,price:"140",desc:"Moderno piso a 50 m de la playa de Levante, con terraza y vistas al mar. Totalmente equipado.",emoji:"🌊"},
+      {name:"Piso 2",slug:"piso_individual-2",beds:2,baths:1,m2:60,price:"90",desc:"Céntrico y luminoso, a pasos de los mejores restaurantes y el paseo marítimo de Benidorm.",emoji:"🏙️"},
+      {name:"Piso 3",slug:"piso_individual-3",beds:1,baths:1,m2:40,price:"65",desc:"Acogedor estudio con vistas despejadas al Mediterráneo. Perfecto para escapadas en pareja.",emoji:"🌅"}
     ]
   },
   en:{nav_ubicaciones:"Locations",nav_ontalvilla:"Ontalvilla de Almazán",nav_benidorm:"Benidorm",nav_sobre:"About us",pisos_title:"Our apartments",map_title_benidorm:"Where are we? · Benidorm",prop_contact_title:"Interested in an apartment?",prop_contact_sub_benidorm:"Contact Laura to book or resolve any questions about our Benidorm apartments.",btn_call:"📞 Call",btn_whatsapp:"💬 WhatsApp",btn_email:"✉️ Email",night:"night",ver_mas:"View apartment →",float_btn:"Contact",footer:"© 2025 Alquileres · All rights reserved",
     props:[
-      {name:"Apartment 1",slug:"piso-benidorm-1",beds:3,baths:2,m2:85,price:"140",desc:"Modern flat 50 m from Levante beach, with terrace and sea views. Fully equipped.",emoji:"🌊"},
-      {name:"Apartment 2",slug:"piso-benidorm-2",beds:2,baths:1,m2:60,price:"90",desc:"Central and bright, steps from the best restaurants and the seafront promenade.",emoji:"🏙️"},
-      {name:"Apartment 3",slug:"piso-benidorm-3",beds:1,baths:1,m2:40,price:"65",desc:"Cosy studio with clear views of the Mediterranean. Perfect for a couple's getaway.",emoji:"🌅"}
+      {name:"Apartment 1",slug:"piso_individual-1",beds:3,baths:2,m2:85,price:"140",desc:"Modern flat 50 m from Levante beach, with terrace and sea views. Fully equipped.",emoji:"🌊"},
+      {name:"Apartment 2",slug:"piso_individual-2",beds:2,baths:1,m2:60,price:"90",desc:"Central and bright, steps from the best restaurants and the seafront promenade.",emoji:"🏙️"},
+      {name:"Apartment 3",slug:"piso_individual-3",beds:1,baths:1,m2:40,price:"65",desc:"Cosy studio with clear views of the Mediterranean. Perfect for a couple's getaway.",emoji:"🌅"}
     ]
   }
 };
