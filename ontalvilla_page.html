@@ -48,7 +48,7 @@
 
   .prop-card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.08);transition:.3s;display:block}
   .prop-card:hover{transform:translateY(-6px);box-shadow:0 12px 32px rgba(0,0,0,.14)}
-  .prop-card-img{height:200px;background:linear-gradient(135deg,var(--soria-light),#c8dfc0);display:flex;align-items:center;justify-content:center;font-size:3.5rem;position:relative;overflow:hidden}
+  .prop-card-img{height:200px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
   .prop-card-img img{width:100%;height:100%;object-fit:cover}
   .prop-card-body{padding:1.4rem}
   .prop-card-body h3{font-size:1.1rem;font-weight:700;margin-bottom:.4rem;color:var(--text)}
@@ -169,7 +169,7 @@ const LANGS={
   es:{nav_ubicaciones:"Ubicaciones",nav_ontalvilla:"Ontalvilla de Almazán",nav_benidorm:"Benidorm",nav_sobre:"Sobre nosotros",badge_soria:"Soria",badge_valencia:"Valencia",casas_title:"Nuestras casas",map_title_ontalvilla:"¿Dónde estamos? · Ontalvilla de Almazán",prop_contact_title:"¿Te interesa alguna propiedad?",prop_contact_sub_soria:"Contacta con Miguel para reservar o resolver cualquier duda sobre nuestros alojamientos en Soria.",btn_call:"📞 Llamar",btn_whatsapp:"💬 WhatsApp",btn_email:"✉️ Email",night:"noche",ver_mas:"Ver casa →",float_btn:"Contactar",footer:"© 2025 Alquileres · Todos los derechos reservados",
     props:[
       {name:"Agradable casa con chimenea y patio totalmente privado",slug:"casa_individual-1",beds:4,baths:1,m2:120,price:"#",desc:"Este alojamiento cuenta con un patio privado y una chimenea acogedora, creando un ambiente perfecto para disfrutar en compañía de su peludo amigo.",emoji:"🏡"},
-      {name:"Tranquilo y buena naturaleza",slug:"casa_individual-2",beds:3,baths:2,m2:90,price:"#",desc:"Acogedora casa rural con porche de madera y huerto propio. A pocos metros del río.",emoji:"🛖"},
+      {name:"Tranquilo y buena naturaleza",slug:"casa_individual-2",beds:3,baths:2,m2:90,price:"#",desc:"Acogedora casa rural con porche de madera y huerto propio. A pocos metros del río.",image:"bungalow-1.JPG"},
       {name:"Tranquilidad y en contacto con la naturaleza",slug:"casa_individual-3",beds:3,baths:1,m2:150,price:"#",desc:"La más grande de nuestras casas, ideal para grupos o familias numerosas. Salón con chimenea de leña.",emoji:"🏠"},
       {name:"Amistad y convivencia 1",slug:"casa_individual-4",beds:6,baths:1,m2:65,price:"#",desc:"Casa pequeña y encantadora para parejas o estancias íntimas. Rodeada de encinas centenarias.",emoji:"🌿"},
       {name:"Amistad y convivencia 2",slug:"casa_individual-5",beds:4,baths:1,m2:100,price:"#",desc:"Casa rehabilitada con materiales tradicionales. Terraza con vistas al campo y parking privado.",emoji:"🌻"},
@@ -194,7 +194,7 @@ function renderGrid(lang){
   const T=LANGS[lang];
   document.getElementById('props-grid').innerHTML=T.props.map(p=>`
     <a href="${p.slug}.html" class="prop-card" aria-label="${p.name}">
-      <div class="prop-card-img" role="img" aria-label="Imagen de ${p.name}">${p.emoji}</div>
+      <div class="prop-card-img"><img src="${p.image}" aria-label="Imagen de un bungalo"></div>
       <div class="prop-card-body">
         <h3>${p.name}</h3>
         <div class="prop-meta">
