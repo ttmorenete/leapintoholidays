@@ -51,7 +51,7 @@
   .locations-grid{display:grid;grid-template-columns:1fr 1fr;gap:2rem;max-width:900px;margin:0 auto}
   .loc-card{border-radius:16px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.1);cursor:pointer;transition:.3s;display:block}
   .loc-card:hover{transform:translateY(-6px);box-shadow:0 10px 35px rgba(0,0,0,.15)}
-  .loc-card-img{height:200px;display:flex;align-items:center;justify-content:center;font-size:4rem}
+  .loc-card-img{height:200px;display:flex;align-items:center;justify-content:center}
   .soria-card .loc-card-img{background:linear-gradient(135deg,var(--soria),var(--soria-dark))}
   .benidorm-card .loc-card-img{background:linear-gradient(135deg,var(--benidorm),var(--benidorm-dark))}
   .loc-card-body{padding:1.5rem;background:#fff}
@@ -152,7 +152,7 @@
     </div>
     <div class="locations-grid">
       <a href="ontalvilla_page.html" class="loc-card soria-card" aria-label="Ontalvilla de Almazán">
-        <div class="loc-card-img" role="img" aria-label="Paisaje verde de Soria">🌿</div>
+        <div class="loc-card-img" aria-label="Paisaje verde de Ontalvilla"><img src="img/Ontalvilla.jpeg"></div>
         <div class="loc-card-body">
           <span class="loc-tag soria-tag" data-i18n="badge_soria">Soria</span>
           <h3 data-i18n="nav_ontalvilla">Ontalvilla de Almazán</h3>
@@ -161,7 +161,7 @@
         </div>
       </a>
       <a href="benidorm_page.html" class="loc-card benidorm-card" aria-label="Benidorm">
-        <div class="loc-card-img" role="img" aria-label="Playa Mediterráneo Benidorm">🌊</div>
+        <div class="loc-card-img" aria-label="Playa Mediterráneo Benidorm"><img src="img/Benidorm.jpeg"></div>
         <div class="loc-card-body">
           <span class="loc-tag benidorm-tag" data-i18n="badge_valencia">Valencia</span>
           <h3 data-i18n="nav_benidorm">Benidorm</h3>
