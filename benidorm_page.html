@@ -44,7 +44,7 @@
   .props-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:2rem;max-width:1100px;margin:0 auto}
   .prop-card{background:#fff;border-radius:16px;overflow:hidden;box-shadow:0 4px 20px rgba(0,0,0,.08);transition:.3s;display:block}
   .prop-card:hover{transform:translateY(-6px);box-shadow:0 12px 32px rgba(0,0,0,.14)}
-  .prop-card-img{height:200px;background:linear-gradient(135deg,var(--benidorm-light),#a8cef0);display:flex;align-items:center;justify-content:center;font-size:3.5rem}
+  .prop-card-img{height:200px;display:flex;align-items:center;justify-content:center}
   .prop-card-img img{width:100%;height:100%;object-fit:cover}
   .prop-card-body{padding:1.4rem}
   .prop-card-body h3{font-size:1.1rem;font-weight:700;margin-bottom:.4rem}
@@ -154,16 +154,16 @@
 const LANGS={
   es:{nav_ubicaciones:"Ubicaciones",nav_ontalvilla:"Ontalvilla de Almazán",nav_benidorm:"Benidorm",nav_sobre:"Sobre nosotros",pisos_title:"Nuestros pisos",map_title_benidorm:"¿Dónde estamos? · Benidorm",prop_contact_title:"¿Te interesa algún piso?",prop_contact_sub_benidorm:"Contacta con Laura para reservar o resolver cualquier duda sobre nuestros pisos en Benidorm.",btn_call:"📞 Llamar",btn_whatsapp:"💬 WhatsApp",btn_email:"✉️ Email",night:"noche",ver_mas:"Ver piso →",float_btn:"Contactar",footer:"© 2025 Alquileres · Todos los derechos reservados",
     props:[
-      {name:"Saffari",slug:"piso_individual-1",beds:2,baths:1,m2:85,price:"#",desc:"Moderno piso a 50 m de la playa de Levante, con terraza y vistas al mar. Totalmente equipado.",emoji:"🌊"},
-      {name:"Tucán de Sal",slug:"piso_individual-2",beds:2,baths:1,m2:60,price:"#",desc:"Céntrico y luminoso, a pasos de los mejores restaurantes y el paseo marítimo de Benidorm.",emoji:"🏙️"},
-      {name:"Tropical Oasis",slug:"piso_individual-3",beds:2,baths:1,m2:40,price:"#",desc:"Acogedor estudio con vistas despejadas al Mediterráneo. Perfecto para escapadas en pareja.",emoji:"🌅"}
+      {name:"Saffari",slug:"piso_individual-1",beds:2,baths:1,m2:85,price:"#",desc:"Moderno piso a 50 m de la playa de Levante, con terraza y vistas al mar. Totalmente equipado.",image:"img/Saffari/Saffari-1.jpeg"},
+      {name:"Tucán de Sal",slug:"piso_individual-2",beds:2,baths:1,m2:60,price:"#",desc:"Céntrico y luminoso, a pasos de los mejores restaurantes y el paseo marítimo de Benidorm.",image:"img/Toucan/Toucan-1.jpeg"},
+      {name:"Tropical Oasis",slug:"piso_individual-3",beds:2,baths:1,m2:40,price:"#",desc:"Acogedor estudio con vistas despejadas al Mediterráneo. Perfecto para escapadas en pareja.",image:"img/Oasis/Oasis-1.jpeg"}
     ]
   },
   en:{nav_ubicaciones:"Locations",nav_ontalvilla:"Ontalvilla de Almazán",nav_benidorm:"Benidorm",nav_sobre:"About us",pisos_title:"Our apartments",map_title_benidorm:"Where are we? · Benidorm",prop_contact_title:"Interested in an apartment?",prop_contact_sub_benidorm:"Contact Laura to book or resolve any questions about our Benidorm apartments.",btn_call:"📞 Call",btn_whatsapp:"💬 WhatsApp",btn_email:"✉️ Email",night:"night",ver_mas:"View apartment →",float_btn:"Contact",footer:"© 2025 Alquileres · All rights reserved",
     props:[
-      {name:"Saffari",slug:"piso_individual-1",beds:2,baths:1,m2:85,price:"#",desc:"Modern flat 50 m from Levante beach, with terrace and sea views. Fully equipped.",emoji:"🌊"},
-      {name:"Salt Toucan",slug:"piso_individual-2",beds:2,baths:1,m2:60,price:"#",desc:"Central and bright, steps from the best restaurants and the seafront promenade.",emoji:"🏙️"},
-      {name:"Tropical Oasis",slug:"piso_individual-3",beds:2,baths:1,m2:40,price:"#",desc:"Cosy studio with clear views of the Mediterranean. Perfect for a couple's getaway.",emoji:"🌅"}
+      {name:"Saffari",slug:"piso_individual-1",beds:2,baths:1,m2:85,price:"#",desc:"Modern flat 50 m from Levante beach, with terrace and sea views. Fully equipped.",image:"img/Saffari/Saffari-1.jpeg"},
+      {name:"Salt Toucan",slug:"piso_individual-2",beds:2,baths:1,m2:60,price:"#",desc:"Central and bright, steps from the best restaurants and the seafront promenade.",image:"img/Toucan/Toucan-1.jpeg"},
+      {name:"Tropical Oasis",slug:"piso_individual-3",beds:2,baths:1,m2:40,price:"#",desc:"Cosy studio with clear views of the Mediterranean. Perfect for a couple's getaway.",image:"img/Oasis/Oasis-1.jpeg"}
     ]
   }
 };
@@ -172,7 +172,7 @@ function renderGrid(lang){
   const T=LANGS[lang];
   document.getElementById('props-grid').innerHTML=T.props.map(p=>`
     <a href="${p.slug}.html" class="prop-card" aria-label="${p.name}">
-      <div class="prop-card-img" role="img" aria-label="Imagen de ${p.name}">${p.emoji}</div>
+      <div class="prop-card-img"><img src="${p.image}" aria-label="Imagen de ${p.name}"></div>
       <div class="prop-card-body">
         <h3>${p.name}</h3>
         <div class="prop-meta">
