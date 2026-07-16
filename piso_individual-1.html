@@ -170,16 +170,26 @@
 <main>
   <div class="photo-hero" role="region" aria-label="Fotos de Piso 1">
     <div class="photo-slides" id="photo-slides">
-      <div class="photo-slide" role="img" aria-label="Foto 1 — terraza con vistas al mar">🌊</div>
+      <div class="photo-slide" role="img" aria-label="Foto 1 — terraza con vistas al mar"><img src="img/Saffari/saffari-1.webp" aria-label="Imagen de un bungalo"></div>
       <div class="photo-slide" role="img" aria-label="Foto 2 — salón">🏖️</div>
       <div class="photo-slide" role="img" aria-label="Foto 3 — dormitorio principal">🛏️</div>
+      <div class="photo-slide" role="img" aria-label="Foto 4 — cocina">🍽️</div>
+      <div class="photo-slide" role="img" aria-label="Foto 5 — vistas desde la terraza">🌅</div>
+      <div class="photo-slide" role="img" aria-label="Foto 4 — cocina">🍽️</div>
+      <div class="photo-slide" role="img" aria-label="Foto 5 — vistas desde la terraza">🌅</div>
+      <div class="photo-slide" role="img" aria-label="Foto 4 — cocina">🍽️</div>
+      <div class="photo-slide" role="img" aria-label="Foto 5 — vistas desde la terraza">🌅</div>
+      <div class="photo-slide" role="img" aria-label="Foto 4 — cocina">🍽️</div>
+      <div class="photo-slide" role="img" aria-label="Foto 5 — vistas desde la terraza">🌅</div>
+      <div class="photo-slide" role="img" aria-label="Foto 4 — cocina">🍽️</div>
+      <div class="photo-slide" role="img" aria-label="Foto 5 — vistas desde la terraza">🌅</div>
       <div class="photo-slide" role="img" aria-label="Foto 4 — cocina">🍽️</div>
       <div class="photo-slide" role="img" aria-label="Foto 5 — vistas desde la terraza">🌅</div>
     </div>
     <button class="ph-btn ph-prev" onclick="phMove(-1)" aria-label="Foto anterior">‹</button>
     <button class="ph-btn ph-next" onclick="phMove(1)" aria-label="Foto siguiente">›</button>
     <div class="ph-dots" id="ph-dots"></div>
-    <div class="ph-counter" id="ph-counter" aria-live="polite">1 / 5</div>
+    <div class="ph-counter" id="ph-counter" aria-live="polite">1 / 15</div>
   </div>
 
   <a href="benidorm_page.html" class="back-btn" aria-label="Volver a Benidorm">
@@ -289,7 +299,7 @@ function lbGoTo(i){lbIdx=i;renderLB();}
 function closeLB(){document.getElementById('lightbox').classList.remove('open');document.body.style.overflow='';}
 document.getElementById('lightbox').addEventListener('click',e=>{if(e.target.id==='lightbox')closeLB();});
 
-const TOTAL_PHOTOS=5;let phIdx=0;
+const TOTAL_PHOTOS=15;let phIdx=0;
 function buildDots(){
   document.getElementById('ph-dots').innerHTML=Array.from({length:TOTAL_PHOTOS},(_,i)=>
     `<span class="ph-dot${i===0?' active':''}" onclick="phGoTo(${i})" role="button" aria-label="Foto ${i+1}"></span>`
