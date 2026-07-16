@@ -184,6 +184,16 @@
       <div class="photo-slide" role="img" aria-label="Foto 3 — salón con chimenea">🔥</div>
       <div class="photo-slide" role="img" aria-label="Foto 4 — dormitorio">🛏️</div>
       <div class="photo-slide" role="img" aria-label="Foto 5 — vistas">🌄</div>
+      <div class="photo-slide" role="img" aria-label="Foto 4 — dormitorio">🛏️</div>
+      <div class="photo-slide" role="img" aria-label="Foto 5 — vistas">🌄</div>
+      <div class="photo-slide" role="img" aria-label="Foto 4 — dormitorio">🛏️</div>
+      <div class="photo-slide" role="img" aria-label="Foto 5 — vistas">🌄</div>
+      <div class="photo-slide" role="img" aria-label="Foto 4 — dormitorio">🛏️</div>
+      <div class="photo-slide" role="img" aria-label="Foto 5 — vistas">🌄</div>
+      <div class="photo-slide" role="img" aria-label="Foto 4 — dormitorio">🛏️</div>
+      <div class="photo-slide" role="img" aria-label="Foto 5 — vistas">🌄</div>
+      <div class="photo-slide" role="img" aria-label="Foto 4 — dormitorio">🛏️</div>
+      <div class="photo-slide" role="img" aria-label="Foto 5 — vistas">🌄</div>
     </div>
     <button class="ph-btn ph-prev" onclick="phMove(-1)" aria-label="Foto anterior">‹</button>
     <button class="ph-btn ph-next" onclick="phMove(1)" aria-label="Foto siguiente">›</button>
@@ -312,7 +322,7 @@ function closeLB(){document.getElementById('lightbox').classList.remove('open');
 document.getElementById('lightbox').addEventListener('click',e=>{if(e.target.id==='lightbox')closeLB();});
 
 /* ── CARRUSEL HERO ── */
-const TOTAL_PHOTOS=5;
+const TOTAL_PHOTOS=15;
 let phIdx=0;
 function buildDots(){
   document.getElementById('ph-dots').innerHTML=Array.from({length:TOTAL_PHOTOS},(_,i)=>
