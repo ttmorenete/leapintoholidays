@@ -179,16 +179,19 @@
   <!-- CARRUSEL GRANDE -->
   <div class="photo-hero" role="region" aria-label="Fotos de Casa 1">
     <div class="photo-slides" id="photo-slides">
-      <div class="photo-slide" role="img" aria-label="Foto 1 — exterior de la casa">🏡</div>
-      <div class="photo-slide" role="img" aria-label="Foto 2 — jardín">🌲</div>
-      <div class="photo-slide" role="img" aria-label="Foto 3 — salón con chimenea">🔥</div>
-      <div class="photo-slide" role="img" aria-label="Foto 4 — dormitorio">🛏️</div>
-      <div class="photo-slide" role="img" aria-label="Foto 5 — vistas">🌄</div>
+      <div class="photo-slide" role="img" aria-label="Foto 1 — exterior de la casa"><img src="img/Bungalow/bungalow-2.webp" aria-label="Imagen de un bungalo"></div>
+      <div class="photo-slide" role="img" aria-label="Foto 2 — jardín"><img src="img/Bungalow/bungalow-1.webp" aria-label="Imagen de un bungalo"></div>
+      <div class="photo-slide" role="img" aria-label="Foto 3 — salón con chimenea"><img src="img/Bungalow/bungalow-3.webp" aria-label="Imagen de un bungalo"></div>
+      <div class="photo-slide" role="img" aria-label="Foto 4 — dormitorio"><img src="img/Bungalow/bungalow-4.webp" aria-label="Imagen de un bungalo"></div>
+      <div class="photo-slide" role="img" aria-label="Foto 5 — vistas"><img src="img/Bungalow/bungalow-5.webp" aria-label="Imagen de un bungalo"></div>
+      <div class="photo-slide" role="img" aria-label="Foto 3 — salón con chimenea"><img src="img/Bungalow/bungalow-6.webp" aria-label="Imagen de un bungalo"></div>
+      <div class="photo-slide" role="img" aria-label="Foto 4 — dormitorio"><img src="img/Bungalow/bungalow-7.webp" aria-label="Imagen de un bungalo"></div>
+      <div class="photo-slide" role="img" aria-label="Foto 5 — vistas"><img src="img/Bungalow/bungalow-8.webp" aria-label="Imagen de un bungalo"></div>
     </div>
     <button class="ph-btn ph-prev" onclick="phMove(-1)" aria-label="Foto anterior">‹</button>
     <button class="ph-btn ph-next" onclick="phMove(1)" aria-label="Foto siguiente">›</button>
     <div class="ph-dots" id="ph-dots"></div>
-    <div class="ph-counter" id="ph-counter" aria-live="polite">1 / 5</div>
+    <div class="ph-counter" id="ph-counter" aria-live="polite">1 / 8</div>
   </div>
 
   <!-- BOTÓN VOLVER -->
@@ -235,7 +238,7 @@
         <div class="contact-btns-v">
           <a href="tel:+34605015207" class="btn-accent" data-i18n="btn_call_reserve">📞 Llamar para reservar</a>
           <a href="https://wa.me/34605015207" target="_blank" rel="noopener" class="btn-accent" data-i18n="btn_whatsapp">💬 WhatsApp</a>
-          <a href="mailto:soria@alquileres.es?subject=Consulta%20Casa%201%20Ontalvilla" class="btn-outline-accent" data-i18n="btn_email">✉️ Email</a>
+          <a href="mailto:casas.ontalvilladealmazan@gmail.com?subject=Consulta%20Casa%201%20Ontalvilla" class="btn-outline-accent" data-i18n="btn_email">✉️ Email</a>
         </div>
       </div>
       <div class="otras-casas" role="navigation" aria-label="Otras casas en Ontalvilla">
@@ -309,7 +312,7 @@ function closeLB(){document.getElementById('lightbox').classList.remove('open');
 document.getElementById('lightbox').addEventListener('click',e=>{if(e.target.id==='lightbox')closeLB();});
 
 /* ── CARRUSEL HERO ── */
-const TOTAL_PHOTOS=5;
+const TOTAL_PHOTOS=8;
 let phIdx=0;
 function buildDots(){
   document.getElementById('ph-dots').innerHTML=Array.from({length:TOTAL_PHOTOS},(_,i)=>
