@@ -190,11 +190,16 @@
       <div class="photo-slide" role="img" aria-label="Foto 5 — vistas"><img src="img/Agradable2/agradable2-9.webp" aria-label="Imagen de un bungalo"></div>
       <div class="photo-slide" role="img" aria-label="Foto 5 — vistas"><img src="img/Agradable2/agradable2-10.webp" aria-label="Imagen de un bungalo"></div>
       <div class="photo-slide" role="img" aria-label="Foto 5 — vistas"><img src="img/Agradable2/agradable2-11.webp" aria-label="Imagen de un bungalo"></div>
+      <div class="photo-slide" role="img" aria-label="Foto 5 — vistas"><img src="img/Patios/patio-amistad-1.webp" aria-label="Imagen de un bungalo"></div>
+      <div class="photo-slide" role="img" aria-label="Foto 5 — vistas"><img src="img/Patios/patio-amistad-2.webp" aria-label="Imagen de un bungalo"></div>
+      <div class="photo-slide" role="img" aria-label="Foto 5 — vistas"><img src="img/Patios/patio-amistad-3.webp" aria-label="Imagen de un bungalo"></div>
+      <div class="photo-slide" role="img" aria-label="Foto 5 — vistas"><img src="img/Patios/patio-amistad-4.webp" aria-label="Imagen de un bungalo"></div>
+      <div class="photo-slide" role="img" aria-label="Foto 5 — vistas"><img src="img/Patios/patio-amistad-5.webp" aria-label="Imagen de un bungalo"></div>
     </div>
     <button class="ph-btn ph-prev" onclick="phMove(-1)" aria-label="Foto anterior">‹</button>
     <button class="ph-btn ph-next" onclick="phMove(1)" aria-label="Foto siguiente">›</button>
     <div class="ph-dots" id="ph-dots"></div>
-    <div class="ph-counter" id="ph-counter" aria-live="polite">1 / 11</div>
+    <div class="ph-counter" id="ph-counter" aria-live="polite">1 / 16</div>
   </div>
 
   <!-- BOTÓN VOLVER -->
@@ -241,8 +246,8 @@
         <div class="price-main"><span data-i18n="price_per_night">Consulta Disponibilidad</span></div>
         <div class="contact-btns-v">
           <a href="tel:+34605015207" class="btn-accent" data-i18n="btn_call_reserve">📞 Llamar para reservar</a>
-          <a href="https://wa.me/34605015207?text=Hola,%20me%20interesa%20la%20Casa%201%20de%20Ontalvilla" target="_blank" rel="noopener" class="btn-accent" data-i18n="btn_whatsapp">💬 WhatsApp</a>
-          <a href="mailto:casas.contalvilladealmazan@gmail.com?subject=Consulta%20Casa%201%20Ontalvilla" class="btn-outline-accent" data-i18n="btn_email">✉️ Email</a>
+          <a href="https://wa.me/34605015207" target="_blank" rel="noopener" class="btn-accent" data-i18n="btn_whatsapp">💬 WhatsApp</a>
+          <a href="mailto:casas.contalvilladealmazan@gmail.com" class="btn-outline-accent" data-i18n="btn_email">✉️ Email</a>
         </div>
       </div>
       <div class="otras-casas" role="navigation" aria-label="Otras casas en Ontalvilla">
@@ -272,9 +277,7 @@ const ZONE_PHOTOS = [
   {src:"🏰", caption_es:"Murallas medievales de Almazán", caption_en:"Medieval walls of Almazán"},
   {src:"🌊", caption_es:"Riberas del río Duero", caption_en:"Banks of the Duero river"},
   {src:"🦅", caption_es:"Laguna de Hinojosa — observación de aves", caption_en:"Hinojosa lagoon — birdwatching"},
-  {src:"🌲", caption_es:"Cañón del Río Lobos", caption_en:"Río Lobos canyon"},
-  {src:"🏛️", caption_es:"Románico de Soria capital", caption_en:"Romanesque architecture in Soria"},
-  {src:"🌄", caption_es:"Atardecer sobre la llanura soriana", caption_en:"Sunset over the Soria plain"},
+  {src:"🌲", caption_es:"Cañón del Río Lobos", caption_en:"Río Lobos canyon"}
 ];
 
 let lbIdx=0, currentLang='es';
@@ -316,7 +319,7 @@ function closeLB(){document.getElementById('lightbox').classList.remove('open');
 document.getElementById('lightbox').addEventListener('click',e=>{if(e.target.id==='lightbox')closeLB();});
 
 /* ── CARRUSEL HERO ── */
-const TOTAL_PHOTOS=11;
+const TOTAL_PHOTOS=16;
 let phIdx=0;
 function buildDots(){
   document.getElementById('ph-dots').innerHTML=Array.from({length:TOTAL_PHOTOS},(_,i)=>
