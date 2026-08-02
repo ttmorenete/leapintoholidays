@@ -179,15 +179,19 @@
   <!-- CARRUSEL GRANDE -->
   <div class="photo-hero" role="region" aria-label="Fotos de Casa 1">
     <div class="photo-slides" id="photo-slides">
-      <div class="photo-slide" role="img" aria-label="Foto 1 — exterior de la casa"><img src="img/CasaPiedra/casapiedra-1.webp" aria-label="Imagen de un bungalo"></div>
-      <div class="photo-slide" role="img" aria-label="Foto 2 — jardín"><img src="img/CasaPiedra/casapiedra-2.webp" aria-label="Imagen de un bungalo"></div>
-      <div class="photo-slide" role="img" aria-label="Foto 3 — salón con chimenea"><img src="img/CasaPiedra/casapiedra-3.webp" aria-label="Imagen de un bungalo"></div>
-      <div class="photo-slide" role="img" aria-label="Foto 4 — dormitorio"><img src="img/CasaPiedra/casapiedra-4.webp" aria-label="Imagen de un bungalo"></div>
-      <div class="photo-slide" role="img" aria-label="Foto 5 — vistas"><img src="img/CasaPiedra/casapiedra-5.webp" aria-label="Imagen de un bungalo"></div>
-      <div class="photo-slide" role="img" aria-label="Foto 2 — jardín"><img src="img/CasaPiedra/casapiedra-6.webp" aria-label="Imagen de un bungalo"></div>
-      <div class="photo-slide" role="img" aria-label="Foto 3 — salón con chimenea"><img src="img/CasaPiedra/casapiedra-7.webp" aria-label="Imagen de un bungalo"></div>
-      <div class="photo-slide" role="img" aria-label="Foto 4 — dormitorio"><img src="img/CasaPiedra/casapiedra-8.webp" aria-label="Imagen de un bungalo"></div>
-      <div class="photo-slide" role="img" aria-label="Foto 5 — vistas"><img src="img/CasaPiedra/casapiedra-9.webp" aria-label="Imagen de un bungalo"></div>
+      <div class="photo-slide" role="img" aria-label="Foto 1 — exterior de la casa"><img src="img/CasaPiedra/casapiedra-12.webp" aria-label="Imagen de un bungalo"></div>
+      <div class="photo-slide" role="img" aria-label="Foto 2 — jardín"><img src="img/CasaPiedra/casapiedra-1.webp" aria-label="Imagen de un bungalo"></div>
+      <div class="photo-slide" role="img" aria-label="Foto 3 — salón con chimenea"><img src="img/CasaPiedra/casapiedra-2.webp" aria-label="Imagen de un bungalo"></div>
+      <div class="photo-slide" role="img" aria-label="Foto 4 — dormitorio"><img src="img/CasaPiedra/casapiedra-3.webp" aria-label="Imagen de un bungalo"></div>
+      <div class="photo-slide" role="img" aria-label="Foto 5 — vistas"><img src="img/CasaPiedra/casapiedra-4.webp" aria-label="Imagen de un bungalo"></div>
+      <div class="photo-slide" role="img" aria-label="Foto 2 — jardín"><img src="img/CasaPiedra/casapiedra-5.webp" aria-label="Imagen de un bungalo"></div>
+      <div class="photo-slide" role="img" aria-label="Foto 3 — salón con chimenea"><img src="img/CasaPiedra/casapiedra-6.webp" aria-label="Imagen de un bungalo"></div>
+      <div class="photo-slide" role="img" aria-label="Foto 4 — dormitorio"><img src="img/CasaPiedra/casapiedra-7.webp" aria-label="Imagen de un bungalo"></div>
+      <div class="photo-slide" role="img" aria-label="Foto 5 — vistas"><img src="img/CasaPiedra/casapiedra-8.webp" aria-label="Imagen de un bungalo"></div>
+      <div class="photo-slide" role="img" aria-label="Foto 4 — dormitorio"><img src="img/CasaPiedra/casapiedra-9.webp" aria-label="Imagen de un bungalo"></div>
+      <div class="photo-slide" role="img" aria-label="Foto 5 — vistas"><img src="img/CasaPiedra/casapiedra-10.webp" aria-label="Imagen de un bungalo"></div>
+      <div class="photo-slide" role="img" aria-label="Foto 4 — dormitorio"><img src="img/CasaPiedra/casapiedra-11.webp" aria-label="Imagen de un bungalo"></div>
+      <div class="photo-slide" role="img" aria-label="Foto 5 — vistas"><img src="img/CasaPiedra/casapiedra-13.webp" aria-label="Imagen de un bungalo"></div>
       <div class="photo-slide" role="img" aria-label="Foto 5 — vistas"><img src="img/Patios/patio-bunpiedra-1.webp" aria-label="Imagen de un bungalo"></div>
       <div class="photo-slide" role="img" aria-label="Foto 5 — vistas"><img src="img/Patios/patio-bunpiedra-2.webp" aria-label="Imagen de un bungalo"></div>
       <div class="photo-slide" role="img" aria-label="Foto 5 — vistas"><img src="img/Patios/patio-bunpiedra-3.webp" aria-label="Imagen de un bungalo"></div>
@@ -196,7 +200,7 @@
     <button class="ph-btn ph-prev" onclick="phMove(-1)" aria-label="Foto anterior">‹</button>
     <button class="ph-btn ph-next" onclick="phMove(1)" aria-label="Foto siguiente">›</button>
     <div class="ph-dots" id="ph-dots"></div>
-    <div class="ph-counter" id="ph-counter" aria-live="polite">1 / 13</div>
+    <div class="ph-counter" id="ph-counter" aria-live="polite">1 / 17</div>
   </div>
 
   <!-- BOTÓN VOLVER -->
@@ -316,7 +320,7 @@ function closeLB(){document.getElementById('lightbox').classList.remove('open');
 document.getElementById('lightbox').addEventListener('click',e=>{if(e.target.id==='lightbox')closeLB();});
 
 /* ── CARRUSEL HERO ── */
-const TOTAL_PHOTOS=13;
+const TOTAL_PHOTOS=17;
 let phIdx=0;
 function buildDots(){
   document.getElementById('ph-dots').innerHTML=Array.from({length:TOTAL_PHOTOS},(_,i)=>
