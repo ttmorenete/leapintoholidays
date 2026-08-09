@@ -12,7 +12,8 @@
 
   nav{position:fixed;top:0;width:100%;z-index:100;background:var(--dark);box-shadow:0 2px 20px rgba(0,0,0,.2);padding:14px 5%}
   .nav-inner{display:flex;align-items:center;justify-content:space-between}
-  .logo{color:#fff;font-size:1.3rem;font-weight:700}
+  .logo{color:#fff;font-size:1.3rem;font-weight:700;letter-spacing:1px;display:flex;align-items:center}
+  .logo img{width:56px;height:56px}
   .nav-links{display:flex;gap:1.8rem;align-items:center}
   .nav-links a{color:#fff;font-size:.95rem;transition:.2s}.nav-links a:hover{color:#aed6a0}
   .dropdown{position:relative}
@@ -117,7 +118,7 @@
 
 <nav role="navigation" aria-label="Menú principal">
   <div class="nav-inner">
-    <a href="index.html" class="logo" aria-label="Volver a la página principal">🏡 Alquileres</a>
+    <a href="index.html" class="logo" aria-label="Volver a la página principal"><img src="img/logo.png">LeapIntoHolidays</a>
     <div class="nav-links">
       <div class="dropdown">
         <button class="dropdown-btn" id="dd-btn" onclick="toggleDropdown(event)" aria-haspopup="true" aria-expanded="false" aria-controls="dd-menu">
