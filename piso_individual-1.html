@@ -14,7 +14,8 @@
   nav{position:fixed;top:0;width:100%;z-index:100;transition:.3s;padding:18px 5%}
   nav.solid{background:var(--dark);box-shadow:0 2px 20px rgba(0,0,0,.3);padding:12px 5%}
   .nav-inner{display:flex;align-items:center;justify-content:space-between}
-  .logo{color:#fff;font-size:1.3rem;font-weight:700;letter-spacing:1px}
+  .logo{color:#fff;font-size:1.3rem;font-weight:700;letter-spacing:1px;display:flex;align-items:center}
+  .logo img{width:56px;height:56px}
   .nav-links{display:flex;gap:1.8rem;align-items:center}
   .nav-links a{color:#fff;font-size:.95rem;transition:.2s}.nav-links a:hover{color:#90caf9}
   .dropdown{position:relative}
@@ -41,7 +42,7 @@
 
   .photo-hero{position:relative;height:650px;background:var(--accent-light);overflow:hidden}
   .photo-slides{display:flex;height:100%;transition:transform .45s ease}
-  .photo-slide{min-width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:8rem;background:linear-gradient(135deg,#d0e8f8,#a8cef0);user-select:none;flex-shrink:0}
+  .photo-slide{width:100%;min-width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:8rem;background:linear-gradient(135deg,#d0e8f8,#a8cef0);user-select:none;flex-shrink:0}
   .photo-slide img{width:100%;height:100%;object-fit:cover}
   .ph-btn{position:absolute;top:50%;transform:translateY(-50%);background:rgba(0,0,0,.45);color:#fff;border:none;border-radius:50%;width:48px;height:48px;font-size:1.5rem;cursor:pointer;z-index:5;transition:.2s}
   .ph-btn:hover{background:rgba(0,0,0,.7)}.ph-prev{left:20px}.ph-next{right:20px}
