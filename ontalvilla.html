@@ -107,11 +107,11 @@
           <span data-i18n="nav_ubicaciones">Ubicaciones</span> <span class="arrow" aria-hidden="true">▾</span>
         </button>
         <div class="dropdown-menu" id="dd-menu" role="menu">
-          <a href="ontalvilla_page.html" role="menuitem">🌿 <span data-i18n="nav_ontalvilla">Ontalvilla de Almazán</span> <span class="dd-badge dd-soria" data-i18n="badge_soria">Soria</span></a>
-          <a href="benidorm_page.html" role="menuitem">🌊 <span data-i18n="nav_benidorm">Benidorm</span> <span class="dd-badge dd-benidorm" data-i18n="badge_valencia">Valencia</span></a>
+          <a href="ontalvilla.html" role="menuitem">🌿 <span data-i18n="nav_ontalvilla">Ontalvilla de Almazán</span> <span class="dd-badge dd-soria" data-i18n="badge_soria">Soria</span></a>
+          <a href="benidorm.html" role="menuitem">🌊 <span data-i18n="nav_benidorm">Benidorm</span> <span class="dd-badge dd-benidorm" data-i18n="badge_valencia">Valencia</span></a>
         </div>
       </div>
-      <a href="sobre-nosotros_page.html" data-i18n="nav_sobre">Sobre nosotros</a>
+      <a href="sobre-nosotros.html" data-i18n="nav_sobre">Sobre nosotros</a>
       <div class="lang-switcher" role="group" aria-label="Seleccionar idioma">
         <button class="lang-btn active" id="btn-es" onclick="setLang('es')" aria-label="Cambiar idioma a Español" title="Español">
           <svg viewBox="0 0 60 40" aria-hidden="true"><rect width="60" height="40" fill="#c60b1e"/><rect y="10" width="60" height="20" fill="#ffc400"/></svg>
@@ -127,9 +127,9 @@
 
 <div class="mobile-menu" id="mobile-menu" role="dialog" aria-modal="true">
   <button class="close-mobile" onclick="closeMobile()" aria-label="Cerrar menú"></button>
-  <a href="ontalvilla_page.html">🌿 <span data-i18n="nav_ontalvilla">Ontalvilla de Almazán</span></a>
-  <a href="benidorm_page.html">🌊 <span data-i18n="nav_benidorm">Benidorm</span></a>
-  <a href="sobre-nosotros_page.html" data-i18n="nav_sobre">Sobre nosotros</a>
+  <a href="ontalvilla.html">🌿 <span data-i18n="nav_ontalvilla">Ontalvilla de Almazán</span></a>
+  <a href="benidorm.html">🌊 <span data-i18n="nav_benidorm">Benidorm</span></a>
+  <a href="sobre-nosotros.html" data-i18n="nav_sobre">Sobre nosotros</a>
   <div class="mobile-lang">
     <button class="lang-btn active" id="mob-es" onclick="setLang('es');closeMobile()" aria-label="Cambiar a Español" title="Español">
       <svg viewBox="0 0 60 40" aria-hidden="true"><rect width="60" height="40" fill="#c60b1e"/><rect y="10" width="60" height="20" fill="#ffc400"/></svg>
@@ -178,22 +178,22 @@
 const LANGS={
   es:{nav_ubicaciones:"Ubicaciones",nav_ontalvilla:"Ontalvilla de Almazán",nav_benidorm:"Benidorm",nav_sobre:"Sobre nosotros",badge_soria:"Soria",badge_valencia:"Valencia",casas_title:"Nuestras casas",map_title_ontalvilla:"¿Dónde estamos? · Ontalvilla de Almazán",prop_contact_title:"¿Te interesa alguna propiedad?",prop_contact_sub_soria:"Contacta con Irene para reservar o resolver cualquier duda sobre nuestros alojamientos en Soria.",btn_call:"📞 +34 605 015 207",btn_whatsapp:"💬 WhatsApp",btn_email:"✉️ casas.ontalvilladealmazan@gmail.com",night:"noche",ver_mas:"Ver casa →",float_btn:"Contactar",footer:"© 2025 Alquileres · Todos los derechos reservados",
     props:[
-      {name:"Agradable casa con chimenea y patio privado",slug:"casa_individual-1",beds:4,baths:1,desc:"Disfruta de la máxima intimidad en esta casa con patio privado y mucha privacidad.",image:"img/nueva-1.webp"},
-      {name:"Tranquilo y buena naturaleza",slug:"casa_individual-2",beds:4,baths:1,desc:"Situado en un entorno muy tranquilo, este bungalow ofrece espectaculares vistas al campo y aire puro.",image:"img/bungalow-1.webp"},
-      {name:"Tranquilidad y en contacto con la naturaleza",slug:"casa_individual-3",beds:8,baths:2,desc:"La más grande de nuestras casas, ideal para grupos o familias numerosas. Salón con chimenea de leña.",image:"img/casapiedra-1.webp"},
-      {name:"Amistad y convivencia 1",slug:"casa_individual-4",beds:6,baths:1,desc:"Ideal para familias o grupos, esta casa destaca por su piscina, chimenea y un gran patio.",image:"img/agradable1-1.webp"},
-      {name:"Amistad y convivencia 2",slug:"casa_individual-5",beds:5,baths:1,desc:"Desconecta en esta fantástica casa de vacaciones que cuenta con piscina y una acogedora chimenea.",image:"img/agradable2-1.webp"},
-      {name:"Descanso, Aire sano, y buenos asados",slug:"casa_individual-6",beds:4,baths:1,desc:"Escapa a la naturaleza en esta acogedora casa situada en un pueblo muy tranquilo. Ideal para senderismo.",image:"img/merendero-1.webp"}
+      {name:"Agradable casa con chimenea y patio privado",slug:"agradable-casa",beds:4,baths:1,desc:"Disfruta de la máxima intimidad en esta casa con patio privado y mucha privacidad.",image:"img/nueva-1.webp"},
+      {name:"Tranquilo y buena naturaleza",slug:"tranquilo-y-buena-naturaleza",beds:4,baths:1,desc:"Situado en un entorno muy tranquilo, este bungalow ofrece espectaculares vistas al campo y aire puro.",image:"img/bungalow-1.webp"},
+      {name:"Tranquilidad y en contacto con la naturaleza",slug:"tranquilidad-y-en-contacto",beds:8,baths:2,desc:"La más grande de nuestras casas, ideal para grupos o familias numerosas. Salón con chimenea de leña.",image:"img/casapiedra-1.webp"},
+      {name:"Amistad y convivencia 1",slug:"amistad-1",beds:6,baths:1,desc:"Ideal para familias o grupos, esta casa destaca por su piscina, chimenea y un gran patio.",image:"img/agradable1-1.webp"},
+      {name:"Amistad y convivencia 2",slug:"amistad-2",beds:5,baths:1,desc:"Desconecta en esta fantástica casa de vacaciones que cuenta con piscina y una acogedora chimenea.",image:"img/agradable2-1.webp"},
+      {name:"Descanso, Aire sano, y buenos asados",slug:"descanso-aire-sano",beds:4,baths:1,desc:"Escapa a la naturaleza en esta acogedora casa situada en un pueblo muy tranquilo. Ideal para senderismo.",image:"img/merendero-1.webp"}
     ]
   },
   en:{nav_ubicaciones:"Locations",nav_ontalvilla:"Ontalvilla de Almazán",nav_benidorm:"Benidorm",nav_sobre:"About us",badge_soria:"Soria",badge_valencia:"Valencia",casas_title:"Our houses",map_title_ontalvilla:"Where are we? · Ontalvilla de Almazán",prop_contact_title:"Interested in a property?",prop_contact_sub_soria:"Contact Irene to book or resolve any questions about our accommodations.",btn_call:"📞 +34 605 015 207",btn_whatsapp:"💬 WhatsApp",btn_email:"✉️ casas.ontalvilladealmazan@gmail.com",night:"night",ver_mas:"View house →",float_btn:"Contact",footer:"© 2025 Alquileres · All rights reserved",
     props:[
-      {name:"Lovely house with a fireplace and a fully private patio",slug:"casa_individual-1",beds:4,baths:1,desc:"Enjoy complete privacy in this newly built home, featuring a fully secluded private patio.",image:"img/nueva-1.webp"},
-      {name:"Peaceful with beautiful nature",slug:"casa_individual-2",beds:3,baths:2,desc:"Located in a peaceful village, this bungalow offers stunning countryside views and fresh air.",image:"img/bungalow-1.webp"},
-      {name:"Peace and connection with nature",slug:"casa_individual-3",beds:3,baths:1,desc:"Our largest property, ideal for groups or big families. Living room with log fireplace.",image:"img/casapiedra-1.webp"},
-      {name:"Friendship and community 1",slug:"casa_individual-4",beds:6,baths:1,desc:"Perfect for families or groups, this holiday home boasts a shared pool, a fireplace, and the spatious patio.",image:"img/agradable1-1.webp"},
-      {name:"Friendship and community 2",slug:"casa_individual-5",beds:4,baths:1,desc:"Unwind in this cozy holiday home featuring a private pool and an inviting fireplace.",image:"img/agradable2-1.webp"},
-      {name:"Relaxed, fresh air, and great for BBQs or roasted food",slug:"casa_individual-6",beds:4,baths:1,desc:"Large garden with barbecue area and children's play area. Very close to the old town of Almazán.",image:"img/merendero-1.webp"}
+      {name:"Lovely house with a fireplace and a fully private patio",slug:"agradable-casa",beds:4,baths:1,desc:"Enjoy complete privacy in this newly built home, featuring a fully secluded private patio.",image:"img/nueva-1.webp"},
+      {name:"Peaceful with beautiful nature",slug:"tranquilo-y-buena-naturaleza",beds:3,baths:2,desc:"Located in a peaceful village, this bungalow offers stunning countryside views and fresh air.",image:"img/bungalow-1.webp"},
+      {name:"Peace and connection with nature",slug:"tranquilidad-y-en-contacto",beds:3,baths:1,desc:"Our largest property, ideal for groups or big families. Living room with log fireplace.",image:"img/casapiedra-1.webp"},
+      {name:"Friendship and community 1",slug:"amistad-1",beds:6,baths:1,desc:"Perfect for families or groups, this holiday home boasts a shared pool, a fireplace, and the spatious patio.",image:"img/agradable1-1.webp"},
+      {name:"Friendship and community 2",slug:"amistad-2",beds:4,baths:1,desc:"Unwind in this cozy holiday home featuring a private pool and an inviting fireplace.",image:"img/agradable2-1.webp"},
+      {name:"Relaxed, fresh air, and great for BBQs or roasted food",slug:"descanso-aire-sano",beds:4,baths:1,desc:"Large garden with barbecue area and children's play area. Very close to the old town of Almazán.",image:"img/merendero-1.webp"}
     ]
   }
 };
